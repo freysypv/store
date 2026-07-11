@@ -1,0 +1,55 @@
+.left-sidebar {
+  width: 200px;
+  position: fixed;
+  height: calc(75vh - 100px);
+  left: 8px;
+  background-color: #e8f3f7;
+  justify-content: flex-start;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  margin-bottom: 20%;
+  margin: 12px;
+  box-shadow: 0 0 4px 4px ;
+  box-sizing: border-box;
+  border-radius: 8px 8px 8px 8px ;
+}
+
+.react-icons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+  color: black;
+  margin-top: 20px;
+  border: solid 1px rgb(214, 205, 101);
+  
+}
+.logo-title {
+  color: rgb(10, 10, 9);
+  text-emphasis: none;
+  font-family: cursive;
+  font-weight: 700;
+}
+
+.sidebar-footer {
+  margin-top: auto; 
+}
+
+.logout-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #580303;
+  color: #f8f5f5;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  box-shadow: 4px #580303;
+  font-size: 1rem;
+  
+}
+
+.logout-btn:hover {
+  background-color: #7b5454;
+}

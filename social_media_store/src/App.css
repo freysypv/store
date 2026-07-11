@@ -1,0 +1,46 @@
+
+/* App Container Setup */
+.app-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr 360px; /* Profiles, Main Content, Trending */
+  gap: 20px;
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* 1. Left Column (Profile / Navigation) */
+/* .profile-column {
+
+}
+
+/* 2. Center Column (Main Feed Feed) */
+/* .main-content {
+  
+} */
+
+/* 3. Right Column  */
+/* .tending-column {
+  
+}  */
+
+/* Responsive Breakpoints */
+@media (max-width: 1200px) {
+  .app-layout {
+    grid-template-columns: 240px 1fr; /* Hide trending column on small laptops */
+  }
+  .tending-column {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-layout {
+    grid-template-columns: 1fr; /* Single column only for mobile */
+    padding: 10px;
+  }
+  .profile-column {
+    display: none;
+  }
+}
+

@@ -1,0 +1,85 @@
+/* Main Container */
+.create-post-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 600px;
+  width: 100%;
+  border: 1px solid #f0f403;
+  box-sizing: border-box;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #077bee;
+}
+
+
+
+/* User Avatar */
+.user-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0; /* Prevents the avatar from squishing */
+}
+
+/* Textarea Input styling */
+.textarea {
+  width: 97%;
+  min-height: 100px;
+  padding: 10px;
+  border: 1px solid #c8f4da;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  color: #100f0f;
+  resize: vertical;
+  background-color: #e5edf2;
+  box-sizing: border-box;
+  box-shadow: 4px #100f0f;
+}
+
+.post-date {
+  margin: 4px;
+  font-size: 0.85rem;
+  color: black ;
+
+}
+
+/* Submit Button State Styles */
+.post-button[type="submit"] {
+  align-self: flex-end; 
+  background-color: #3498db;
+  color: #ffffff;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.post-button[type="submit"]:hover {
+  background-color: #8acaf5;
+}
+
+@media screen and (max-width: 600px) {
+  .create-post-card {
+    margin: 10px;
+    padding: 16px;
+    width: auto;
+  }
+}

@@ -1,0 +1,48 @@
+/* Container styling */
+.post-actions {
+  display: flex;
+  align-items: center;
+  padding: 4px;
+}
+
+
+.like-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  color: #65676b; 
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+}
+
+
+.like-button:hover { 
+  color: #e0245e; 
+}
+
+/* Likes */
+.like-button.liked {
+  color: #e0245e; /* Twitter/Instagram style red-pink */
+  animation: pop 0.3s ease-in-out;
+}
+
+/* Count text styling */
+.like-count {
+  font-size: 10px;
+
+}
+
+/* Pop animation when clicked */
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
