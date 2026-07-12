@@ -13,6 +13,7 @@ import Navbar from './Components/Navbar';
 import Footer from './Components/Footer'; 
 import RightSidebar from './Components/Sidebars/RightSidebar'; 
 import LeftSidebar from './Components/Sidebars/LeftSidebar'; 
+import Catalog from './pages/Catalog';
 
 export default function App() { 
   return ( 
@@ -36,6 +37,7 @@ export default function App() {
               <Route path="/contact" element={<Contact />} /> 
               <Route path="/profile" element={<Profile />} />
               <Route path="/Cart" element={<Cart />} />
+              <Route path="/Catalog" element={<Catalog />} />
               <Route path="*" element={<h1>404 - Page Not Found</h1>} /> 
 
             </Routes> 

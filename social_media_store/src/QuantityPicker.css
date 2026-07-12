@@ -1,0 +1,44 @@
+.QuantityPicker {
+    display: flex;
+    align-items: center; 
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+    border:1px solid #e0e0e0;
+    border-radius: 8px;
+   
+  }
+  
+  .QuantityPicker button {
+    width: 30px;
+    height: 30px;
+    font-size: 1.2rem;
+    border: none;
+    background-color: #5ba5f5;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px 5px 5px 5px;
+  }
+  
+  .QuantityPicker label {
+    font-size: 16px;
+    min-width: 10px;
+    text-align: center;
+    
+    
+  }
+
+  .controls {
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    overflow: hidden;
+
+    
+  }
+  .price-total {
+     font-size: 1.2rem;
+     color: #333;
+     font-weight: 600;
+  
+  }

@@ -1,54 +1,117 @@
-// pages/Cart.jsx
 import React from 'react';
+import './cart.css'
+import QuantityPicker from "../QuantityPicker"; 
 
-function Cart() {
-  // Mock data - replace with your global state or context later
+
+// initialize cart array
+const initialCart = JSON.parse(localStorage.getItem('ShoppingCart')) || [];
+
+function SaveShoppingCart() {
+  localStorage.setItem('shoppingcart', JSON.stringify(ShoppingCart));
+}
+
+//  f to update or add to the shopping cart
+function AddToShoppingCart(id, name, price, quantity = 1){
+  const ExistingItems = cart.find(item => item.id === id);
+
+  if (ExistingItems) {
+    ExistingItems.quantity += quantity;
+  }else {
+    cart.push({id, name, price, quantity});
+  }
+
+  SaveShoppingCart();
+  console.log({name}, 'added to shoping cart')
+
+}
+
+// f to remove items 
+function RemoveItem(id) {
+  cart = cart.filter(items => item.id !== id);
+  SaveShoppingCart();
+}
+
+function getShoppingCartTotal(){
+  return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+}
+
+function ShoppingCart() {
+  
   const cartItems = [
-    { id: 1, name: 'Social Hive Premium Hoodie', price: 49.99, quantity: 1, image: 'https://placeholder.com' },
-    { id: 2, name: 'Honeycomb Coffee Mug', price: 15.99, quantity: 2, image: 'https://placeholder.com' }
+    { 
+      id: 1, 
+      name: 'Social Hive Premium Hoodie', 
+      price: 49.99, 
+      quantity: 1, 
+      // image: 'https://placehold.co' 
+    },
+    { 
+      id: 2, 
+      name: 'Honeycomb Coffee Mug', 
+      price: 15.99, 
+      quantity: 2, 
+      // image: 'https://placehold.co' 
+    }
   ];
 
   const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
-  return (
-    <div style={styles.container}>
-      <h1 style={styles.heading}>Your Cart</h1>
-      
-      <div style={styles.cartLayout}>
-        <div style={styles.itemsList}>
-          {cartItems.map(item => (
-            <div key={item.id} style={styles.cartItem}>
-              <img src={item.image} alt={item.name} style={styles.itemImage} />
-              <div style={styles.itemDetails}>
-                <h3 style={styles.itemName}>{item.name}</h3>
-                <p style={styles.itemPrice}>${item.price.toFixed(2)}</p>
-                <span style={styles.itemQty}>Qty: {item.quantity}</span>
-              </div>
-              <button style={styles.removeBtn}>Remove</button>
+ return (
+  <div className="cart-page">
+    <h1 className="cart-page__title">Your Cart</h1>
+    
+    <div className="cart-container">
+      {/* Left Column: Items */}
+      <div className="cart-items-list">
+        {cartItems.map(item => (
+          <div key={item.id} className="cart-item">
+            <img 
+              className="cart-item__image" 
+              src={item.image || null} 
+              alt={item.name} 
+            />
+            
+            <div className="cart-item__details">
+              <h3 className="cart-item__name">{item.name}</h3>
+              <p className="cart-item__price">${item.price.toFixed(2)}</p>
+              <span className="cart-item__quantity">Qty: {item.quantity}</span>
             </div>
-          ))}
-        </div>
+            
+            <button type="button" className="cart-item__remove-btn">
+              Remove
+            </button>
+          </div>
+        ))}
+      </div>
 
-        <div style={styles.summaryCard}>
-          <h2 style={styles.summaryTitle}>Order Summary</h2>
-          <div style={styles.summaryRow}>
-            <span>Subtotal</span>
-            <span>${total.toFixed(2)}</span>
-          </div>
-          <div style={styles.summaryRow}>
-            <span>Shipping</span>
-            <span style={{ color: '#10b981', fontWeight: 'bold' }}>FREE</span>
-          </div>
-          <hr style={styles.divider} />
-          <div style={{ ...styles.summaryRow, fontWeight: '700', fontSize: '1.2rem' }}>
-            <span>Total</span>
-            <span>${total.toFixed(2)}</span>
-          </div>
-          <button style={styles.checkoutBtn}>Proceed to Checkout</button>
+      {/* Right Column: Summary Card */}
+      <div className="cart-summary">
+        <h2 className="cart-title">Order Summary</h2>
+        
+        <div className="cart-summary-2">
+          <span>Subtotal</span>
+          <span>${subtotal.toFixed(2)}</span>
         </div>
+        
+        <div className="cart-summary">
+          <span>Shipping</span>
+          <span className="free-shipping">Free Shipping</span>
+        </div>
+        
+        <hr className="cart-summary__divider" />
+        
+        <div className="cart-total">
+          <span>Total</span>
+          <span>${total.toFixed(2)}</span>
+        </div>
+        
+        <button type="button" className="checkout-btn">
+          Proceed to Checkout
+        </button>
       </div>
     </div>
-  );
+  </div>
+);
 }
 
-export default Cart;
+export default ShoppingCart;
