@@ -1,0 +1,199 @@
+
+/* Center the form on the screen */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Card container styling */
+.auth-card {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+}
+
+/* Header style */
+.auth-card h2 {
+  margin-top: 0;
+  margin-bottom: 24px;
+  color: #333333;
+  font-size: 28px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Form field layout */
+.auth-input {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Label styling */
+.auth-input label {
+  margin-bottom: 8px;
+  color: #666666;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Input fields */
+.auth-input input {
+  padding: 12px 16px;
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #333333;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+
+/* Input focus effect */
+.auth-input input:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
+/* Primary submit button */
+.auth-submit-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: #4a90e2;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  margin-top: 10px;
+}
+
+/* Button hover and active states */
+.auth-submit-btn:hover {
+  background-color: #357abd;
+}
+
+.auth-submit-btn:active {
+  transform: scale(0.98);
+}
+
+/* Bottom text for view switching */
+.auth-toggle-text {
+  text-align: center;
+  margin-top: 24px;
+  color: #666666;
+  font-size: 14px;
+}
+
+/* Clickable link text */
+.auth-toggle-link {
+  color: #4a90e2;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.auth-toggle-link:hover {
+  text-decoration: underline;
+}
+
+/* Focus indicator for keyboard accessibility users */
+.auth-toggle-link:focus-visible {
+  outline: 2px solid #4a90e2;
+}
+
+
+/* 2. Mobile & Mobile-Landscape Devices (Up to 576px wide) */
+@media screen and (max-width: 576px) {
+  .auth-container {
+    padding: 10px; /* Reduces spacing on mobile screens */
+    background: #ffffff; /* Optional: Makes full background white on mobile for a clean app feel */
+  }
+
+  .auth-card {
+    padding: 30px 20px;
+    box-shadow: none; /* Removes shadow on mobile for a flatter, native look */
+    max-width: 100%;
+    border-radius: 0px; /* Spans full screen width cleanly */
+  }
+}
+
+/* 3. Tablets & iPads (Between 577px and 768px wide) */
+@media screen and (min-width: 577px) and (max-width: 768px) {
+  .auth-card {
+    padding: 35px 30px;
+    max-width: 380px;
+  }
+}
+
+/* 4. Laptops & Small Desktops (Between 769px and 1024px wide) */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .auth-card {
+    max-width: 400px; /* Keeps the form perfectly centered and readable */
+  }
+}
+
+/* 5. Extra Large Monitors (Ultra-wide Desktops over 1440px wide) */
+@media screen and (min-width: 1440px) {
+  .auth-card {
+    transform: scale(1.1); /* Scales up the card slightly on high-resolution displays */
+    transition: transform 0.3s ease;
+  }
+}
+
+/* 6. Dark Mode Preference (Applies automatically if user device has dark mode enabled) */
+@media (prefers-color-scheme: dark) {
+  .auth-container {
+    background: linear-gradient(135deg, #1a1c20 0%, #0f1013 100%);
+  }
+
+  .auth-card {
+    background: #24272c;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+
+  .auth-card h2 {
+    color: #ffffff;
+  }
+
+  .input-group label {
+    color: #b0b3b8;
+  }
+
+  .auth-input {
+    background-color: #1a1c20;
+    border-color: #3a3f47;
+    color: #ffffff;
+  }
+
+  .auth-input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+  }
+
+  .toggle-text {
+    color: #b0b3b8;
+  }
+
+  .toggle-link {
+    color: #3b82f6;
+  }
+  
+  .toggle-link:hover {
+    color: #60a5fa;
+  }
+}

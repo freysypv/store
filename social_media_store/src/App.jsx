@@ -1,6 +1,7 @@
 import './App.css'; 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; 
 
+
 // Pages
 import Home from './pages/Home'; 
 import About from './pages/About'; 
@@ -14,6 +15,7 @@ import Footer from './Components/Footer';
 import RightSidebar from './Components/Sidebars/RightSidebar'; 
 import LeftSidebar from './Components/Sidebars/LeftSidebar'; 
 import Catalog from './pages/Catalog';
+import AuthForm from './components/AuthForm';
 
 export default function App() { 
   return ( 
@@ -21,6 +23,8 @@ export default function App() {
       <section className="App"> 
        
         <Navbar /> 
+
+
 
        
         <div className="app-layout"> 
@@ -38,6 +42,7 @@ export default function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/Cart" element={<Cart />} />
               <Route path="/Catalog" element={<Catalog />} />
+              <Route path="/AuthForm" element={<AuthForm />} />
               <Route path="*" element={<h1>404 - Page Not Found</h1>} /> 
 
             </Routes> 
@@ -50,6 +55,7 @@ export default function App() {
           </aside> 
 
         </div> 
+
       </section> 
       <Footer />
     </Router> 

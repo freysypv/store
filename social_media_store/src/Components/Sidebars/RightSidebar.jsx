@@ -77,7 +77,7 @@ function RightSidebar() {
       {/* Sticky Advertisement Banner */}
       <div className=" ad-banner">
         <span className="ad-tag">Sponsored</span>
-        <img src="" />
+        {/* <img src="" /> */}
       </div>
     
 
