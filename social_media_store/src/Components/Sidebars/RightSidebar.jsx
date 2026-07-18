@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import './RightSidebar.css';
-import Trending from "../Feeds/Trending.jsx";
 import React from 'react';
 
 

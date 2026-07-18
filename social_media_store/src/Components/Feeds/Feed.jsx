@@ -1,79 +1,166 @@
-import React from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react'; 
 import CreatePost from './CreatePost'; 
 import PostCard from './PostCard'; 
+// FIX: Imported everything as PostService to match your component calls
+import * as PostService from "../../services/postService"; 
 
 function Feed() { 
-  
-  const mockPosts = [
-    {
-      id: 1,
-      user: "Alex Johnson",
-      username: "@alex_dev",
-      content: "Just finished refactoring my React application structure! Feels amazing to get those file paths running cleanly. 🚀 #webdev #react",
-      likes: 24,
-      comments: 5
-    },
-    {
-      id: 2,
-      user: "Sarah Smith",
-      username: "@sarah_design",
-      content: "Working on a new 3-column dashboard layout. Grid or Flexbox, what is your preference for sidebar columns? 🤔",
-      likes: 42,
-      comments: 12
-    },
+  const handleAddNewPost = async (postText) => {
+    // Fallback values if no active user session exists in cache state
+    const newPostObj = { 
+      user: user?.name || "Anonymous Guest", 
+      username: user?.username || "@guest", 
+      avatar: user?.avatar || "https://picsum.photos", 
+      date: "Just now", 
+      text: postText, 
+      likes: 0, 
+      comments: [] 
+    }; 
 
-    {
-    id: 3,
-    username: "alex_dev",
-    avatar: "https://unsplash.com",
-    date: "2 hours ago",
-    text: "Just pushed my new React project to production! The new React 19 compiler makes optimization so much easier. Anyone else trying it out?",
-    likes: 42,
-    comments: [
-      "Awesome work! Looks incredibly smooth.",
-      "Congrats! Did you run into any dependency issues?",
-      "Loving React 19 so far as well."
-    ]
-  },
-  {
-    id: 4,
-    username: "design_sarah",
-    avatar: "https://unsplash.com",
-    date: "5 hours ago",
-    text: "Spent the morning playing with modern CSS Grid layouts. It's amazing how much layout complexity we can handle now with just a few lines of clean code.",
-    likes: 128,
-    comments: [
-      "Grid completely changed how I build interfaces.",
-      "Mind sharing a snippet of what you built?"
-    ]
-  },
-  {
-    id: 5,
-    username: "coder_cat",
-    avatar: "https://unsplash.com",
-    date: "Yesterday",
-    text: "That moment when your code runs perfectly on the very first try... and immediately makes you suspicious that something is horribly wrong hidden underneath.",
-    likes: 256,
-    comments: [
-      "Every single time! 😂",
-      "Check the console logs immediately!",
-      "It's a trap, don't close the IDE yet."
-    ]
+    try { 
+      const savedPost = await PostService.createPost(newPostObj); 
+      setItems((prev) => [savedPost, ...prev]); 
+    } catch (error) { 
+      console.error("Failed to save post:", error); 
+      setItems((prev) => [{ ...newPostObj, id: Date.now().toString() }, ...prev]); 
+    } 
+  };
+
+  // 1. Initial State synchronized with localStorage 
+  const [items, setItems] = useState([]); 
+
+  const [page, setPage] = useState(() => { 
+    const savedPage = localStorage.getItem('infinite_scroll_page'); 
+    return savedPage ? JSON.parse(savedPage) : 1; 
+  }); 
+
+  const [loading, setLoading] = useState(false); 
+  const loaderRef = useRef(null); 
+
+  // Single tracking lock ref to cleanly eliminate duplicate network requests 
+  const isFetching = useRef(false); 
+
+  // Synchronize items and current page value to localStorage whenever they change 
+  useEffect(() => { 
+    localStorage.setItem('infinite_scroll_items', JSON.stringify(items)); 
+    localStorage.setItem('infinite_scroll_page', JSON.stringify(page)); 
+  }, [items, page]); 
+  
+
+  // Integrated real backend API function wrapped in useCallback 
+  const fetchMoreData = useCallback(async (currentPage) => { 
+    if (isFetching.current) return; 
+    isFetching.current = true; 
+    setLoading(true); 
+    
+    try { 
+      // Call your imported backend service functions safely 
+      const response = await PostService.getPosts(currentPage, 10); 
+      
+      // Handle array structure based on how your backend returns data 
+      const newItems = Array.isArray(response) ? response : response.data || []; 
+      
+      setItems((prev) => { 
+        const currentIds = new Set(prev.map(item => item.id || item._id));
+          // Filter out any incoming item that already exists in the feed state
+        const uniquelyFiltered = newItems.filter(item => !currentIds.has(item.id || item._id)); 
+        return [...prev, ...uniquelyFiltered]; 
+      });
+
+    } catch (error) { 
+      console.error("Error fetching data from PostService:", error); 
+    } finally { 
+      isFetching.current = false; 
+      setLoading(false); 
+    } 
+  }, []); 
+
+  // Effect 1: Fetches more items whenever the "page" state changes 
+  useEffect(() => { 
+    const expectedItemCount = page * 10; 
+    if (items.length < expectedItemCount) { 
+      fetchMoreData(page); 
+    } 
+  }, [page, items.length, fetchMoreData]); 
+
+  // Effect 2: Observes the bottom element to trigger page increment 
+  useEffect(() => { 
+    const currentLoader = loaderRef.current; 
+    if (!currentLoader) return; 
+
+    const observer = new IntersectionObserver( 
+      (entries) => { 
+        if (entries[0].isIntersecting && !isFetching.current) { 
+          setPage((prevPage) => prevPage + 1); 
+        } 
+      }, 
+      { threshold: 0.1, rootMargin: "100px" } 
+    ); 
+
+    observer.observe(currentLoader); 
+
+    return () => { 
+      if (currentLoader) { 
+        observer.unobserve(currentLoader); 
+      } 
+    }; 
+  }, [loading]); 
+
+  // Handle user creating a new post manually 
+  // const handleAddNewPost = async (postText) => { 
+  //   const newPostObj = { 
+  //     user: "Current User", 
+  //     username: "@current_user", 
+  //     avatar: "https://picsum.photos", 
+  //     date: "Just now", 
+  //     text: postText, 
+  //     likes: 0, 
+  //     comments: [] 
+  //   }; 
+
+  //   try { 
+      
+  //     const savedPost = await PostService.createPost(newPostObj); 
+      
+  //     setItems((prev) => [savedPost, ...prev]); 
+  //   } catch (error) { 
+  //     console.error("Failed to save post to the server:", error);  
+  //     setItems((prev) => [{ ...newPostObj, id: Date.now() }, ...prev]); 
+  //   } 
+  // }; 
+
+  const loadInitalItems = async () => {
+     // load initial data
+    const savedItems = localStorage.getItem('infinite_scroll_items');  
+    let initialItems = []; 
+    if(savedItems) {
+      initialItems = JSON.parse(savedItems);      
+    }
+ 
+    if(initialItems.length < 1) {
+      initialItems = await PostService.getPosts();
+    }
+
+    setItems(initialItems);
+    console.log(initialItems)
   }
 
-  ];
+  useEffect(() => { 
+   loadInitalItems();
+  }, []);
 
   return ( 
     <div className="feed-container"> 
-      <CreatePost /> 
-      <div className="feed-posts"> 
-        {mockPosts.map((post) => ( 
-          <PostCard key={post.id} post={post} /> 
-        ))} 
+      <CreatePost onSavePost={handleAddNewPost} /> 
+      <div className="posts-list"> 
+        {items.map((post, index) => ( 
+        <PostCard key={`${post.id || post._id}-${index}`} PostData={post} /> ))} 
+      </div> 
+      <div ref={loaderRef} className="feed-loader" style={{ padding: '20px', textAlign: 'center', minHeight: '50px' }}> 
+        {loading && <div className="spinner">Fetching timeline updates...</div>} 
       </div> 
     </div> 
   ); 
 } 
 
 export default Feed;
-

@@ -1,53 +1,140 @@
+.contact-form-container { 
+  max-width: 500px; 
+  margin: 40px auto; 
+  padding: 30px; 
+  border: 1px solid #67677c; 
+  border-radius: 8px; 
+  background-color: #f8f5f5; 
+  box-shadow: 0 4px 12px rgba(143, 140, 140, 0.05); 
+  box-sizing: border-box; 
+  width: 90%; /* Prevents the container from clipping on tiny screens */
+} 
 
-.home-container {
+.contact-form-title { 
+  margin-top: 0; 
+  margin-bottom: 20px; 
+  font-size: 1.8rem; 
+  color: #0c0c0c; 
+  font-family: system-ui, -apple-system, sans-serif; 
+} 
+
+.status-message { 
+  padding: 12px; 
+  border-radius: 6px; 
+  font-weight: 500; 
+  margin-bottom: 20px; 
+  font-size: 0.95rem; 
+  font-family: system-ui, -apple-system, sans-serif; 
+} 
+
+.status-success { 
+  background-color: #f0f4ec; 
+  color: #1e4620; 
+  border: 1px solid #b8d5a0; 
+} 
+
+.status-error { 
+  background-color: #fce8e6; 
+  color: #a51d24; 
+  border: 1px solid #f7c3bf; 
+} 
+
+.contact-form { 
+  display: flex; 
+  flex-direction: column; 
+} 
+
+.form-group { 
+  margin-bottom: 20px; 
+} 
+
+.form-label { 
+  display: block; 
+  margin-bottom: 6px; 
+  font-weight: 500; 
+  font-size: 1rem; 
+  color: #090808; 
+  font-family: system-ui, -apple-system, sans-serif; 
+} 
+
+.form-input, .form-textarea { 
+  width: 100%; 
+  padding: 10px; 
+  border: 1px solid #cccccc; 
+  border-radius: 6px; 
+  font-family: system-ui, -apple-system, sans-serif; 
+  font-size: 1rem; 
+  box-sizing: border-box; 
+  transition: border-color 0.2s, box-shadow 0.2s; 
+  background-color: #ffffff; 
+} 
+
+.form-input:focus, .form-textarea:focus { 
+  outline: none; 
+  border-color: #0066cc; 
+  box-shadow: 0 0 0 3px rgba(161, 203, 235, 0.25); 
+} 
+
+.form-textarea { 
+  resize: vertical; 
+} 
+
+.form-submit-btn { 
+  width: 100%; 
+  padding: 12px; 
+  background-color: #0066cc; 
+  color: #ffffff; 
+  border: none; 
+  border-radius: 6px; 
+  font-size: 1rem; 
+  font-weight: 600; 
+  font-family: system-ui, -apple-system, sans-serif; 
+  cursor: pointer; 
+  transition: background-color 0.2s; 
+} 
+
+/* Interactive Hover Link */ 
+.form-submit-btn:hover:not(:disabled) { 
+  background-color: #0052a3; 
+} 
+
+/* Disabled Submit Button State */ 
+.form-submit-btn:disabled { 
+  background-color: #cccccc; 
+  color: #666666; 
+  cursor: not-allowed; 
+} 
+
+/* --- RESPONSIVE BREAKPOINTS (FIXED DESIGN) --- */
+
+/* 1. DEFAULT BASE MOBILE (0px to 480px) */
+.home { 
   display: flex;
-  width: 100%;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #f8f9fa;
-  font-family: Arial, Helvetica, sans-serif;
+  flex-direction: column; /* Stack elements layout */ 
+  gap: 4px; 
+  font-size: 12px; 
+  padding: 8px;
 }
 
-.title {
-  font-size: 2.5rem;
-  color: #1a1a1a;
-  margin-bottom: 2rem;
-  text-align: center;
-  font-weight: 700;
-  letter-spacing: -0.05em;
-  
-}
+/* 2. TABLETS (481px to 768px) */
+@media (min-width: 481px) { 
+  .home { 
+    flex-direction: row; /* Change to side-by-side layout */ 
+    gap: 8px; 
+    font-size: 14px; 
+    padding: 10px 14px; 
+  } 
+} 
 
-/* 3. DESKTOPS / LAPTOPS ( */
-@media (min-width: 769px) {
-  .home {
-    font-size: 16px;
+/* 3. DESKTOPS / LAPTOPS (769px and up) */ 
+@media (min-width: 769px) { 
+  .home { 
+    font-size: 16px; 
     color: #1a202c; 
-  }
+  } 
   
-  .home:hover {
+  .home:hover { 
     color: #3182ce; 
-    transform: translateY(-1px); /* Gentle lift effect */
-  }
-}
-
-/* TABLETS  */
-@media (min-width: 481px) {
-  .home {
-    flex-direction: row; /* Change to side-by-side row layout */
-    gap: 8px;
-    font-size: 14px;
-    padding: 10px 14px;
-  }
-}
-/* @media query for mobile screens  */
-@media (max-width: 768px) {
-  .home {
-    flex-direction: column; /* Stack icon on top of text */
-    gap: 4px;
-    font-size: 12px; /* Smaller text for mobile tabs */
-  }
+    transform: translateY(-1px); /* Gentle lift effect */ 
+  } 
 }

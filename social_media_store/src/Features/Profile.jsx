@@ -1,11 +1,12 @@
 import './profile.css'; 
 import React, { useState } from 'react'; 
+import { useNavigate } from 'react-router-dom';
 
 export default function Profile() { 
   const [isEditing, setEditing] = useState(false); 
   const [activeTab, setActiveTab] = useState('overview'); 
+  const navigate = useNavigate();
   
-  // FIX: Changed avatarUrl from '' to null to prevent the empty string DOM warning
   const [user, setUser] = useState({ 
     id: 'usr_9482f3a', 
     name: 'Alex Chen', 
@@ -81,7 +82,19 @@ export default function Profile() {
               <p className="view-bio">{user.bio || 'No bio written yet'}</p> 
             </div> 
             <button type="button" className="btn-edit" onClick={() => setEditing(true)}> 
-              Edit Profile </button> 
+              Edit Profile </button>
+            <div className="profile-create-profile"> 
+            
+            <button 
+              type="button"
+              onClick={() => navigate('/ProfileCreationForm')} 
+              className="btn-submit"
+            >
+              Create Profile
+            </button> 
+          </div>
+
+
           </article> 
         ) : ( 
           <form className="profile-form" onSubmit={(e) => { e.preventDefault(); handleSave(); }}> 
@@ -109,6 +122,7 @@ export default function Profile() {
               <button type="submit" className="btn-submit">Save Changes</button> 
               <button type="button" onClick={handleCancel} className="btn-cancel">Cancel</button> 
             </div> 
+           
           </form> 
         )} 
       </main> 

@@ -1,12 +1,11 @@
-/* Container Box */
 .contact-form-container {
   max-width: 500px;
   margin: 40px auto;
   padding: 30px;
-  border: 1px solid #e1e1e6;
+  border: 1px solid #67677c;
   border-radius: 8px;
-  background-color: #ffffff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  background-color: #f8f5f5;
+  box-shadow: 0 4px 12px rgba(143, 140, 140, 0.05);
   box-sizing: border-box;
 }
 
@@ -15,7 +14,7 @@
   margin-top: 0;
   margin-bottom: 20px;
   font-size: 1.8rem;
-  color: #111111;
+  color: #0c0c0c;
   font-family: system-ui, -apple-system, sans-serif;
 }
 
@@ -30,7 +29,7 @@
 }
 
 .status-success {
-  background-color: #dfebd4;
+  background-color: #f0f4ec;
   color: #1e4620;
   border: 1px solid #b8d5a0;
 }
@@ -41,7 +40,6 @@
   border: 1px solid #f7c3bf;
 }
 
-/* Form Layout Elements */
 .contact-form {
   display: flex;
   flex-direction: column;
@@ -55,42 +53,43 @@
   display: block;
   margin-bottom: 6px;
   font-weight: 500;
-  font-size: 0.9rem;
-  color: #444444;
+  font-size: 1rem;
+  color: #090808;
   font-family: system-ui, -apple-system, sans-serif;
 }
 
-/* Input Fields & Textarea */
 .form-input,
 .form-textarea {
   width: 100%;
   padding: 10px;
-  border: 1px solid #cccccc;
+  border: 1px solid #d1d1d1; 
   border-radius: 6px;
   font-family: system-ui, -apple-system, sans-serif;
   font-size: 1rem;
   box-sizing: border-box;
   transition: border-color 0.2s, box-shadow 0.2s;
+  background-color: white;
+  color:black;
 }
 
 .form-input:focus,
 .form-textarea:focus {
   outline: none;
   border-color: #0066cc;
-  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.15);
+  box-shadow: 0 0 0 3px rgba(161, 203, 235, 0.15);
 }
 
 .form-textarea {
   resize: vertical;
+  color:black;
 }
 
-/* Submit Action Button */
+/* Active Button State */
 .form-submit-btn {
-  width: 100%;
+  width: 50%;
   padding: 12px;
   background-color: #0066cc;
-  color: #ffffff;
-  border: none;
+  color: #ffffff; 
   border-radius: 6px;
   font-size: 1rem;
   font-weight: 600;
@@ -99,11 +98,15 @@
   transition: background-color 0.2s;
 }
 
+/* Hover State (Only works when button is active) */
 .form-submit-btn:hover:not(:disabled) {
   background-color: #0052a3;
 }
 
+/* Fixed: Only locks style when 'disabled' HTML attribute is present */
 .form-submit-btn:disabled {
   background-color: #cccccc;
+  color: #767676;
   cursor: not-allowed;
 }
+
