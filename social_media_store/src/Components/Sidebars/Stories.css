@@ -1,0 +1,121 @@
+/* Container Wrapper */
+.stories-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 672px;
+  margin: 16px auto;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+}
+
+/* Horizontal Scroll Area */
+.carousel-container {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.carousel-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* Individual Story Item */
+.story-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  scroll-snap-align: start;
+}
+
+/* Outer Gradient Borders */
+.ring-outer {
+  padding: 2.5px;
+  border-radius: 50%;
+  transition: transform 0.1s ease;
+}
+
+.ring-outer:active {
+  transform: scale(0.95);
+}
+
+.ring-outer.unseen {
+  background: linear-gradient(45deg, #f59e0b, #d946ef);
+}
+
+.ring-outer.seen {
+  background: linear-gradient(45deg, #e5e7eb, #d1d5db);
+}
+
+/* Avatar Border Frame */
+.ring-inner {
+  background-color: #ffffff;
+  padding: 2px;
+  border-radius: 50%;
+  display: flex;
+}
+
+.story-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Username Label */
+.story-username {
+  font-size: 12px;
+  color: #4b5563;
+  margin-top: 4px;
+  max-width: 64px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Navigation Buttons */
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid #f3f4f6;
+  border-radius: 50%;
+  padding: 6px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  display: none; /* Hidden on mobile */
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-btn:hover {
+  background-color: #ffffff;
+}
+
+.left-btn { left: 8px; }
+.right-btn { right: 8px; }
+
+.nav-icon {
+  width: 16px;
+  height: 16px;
+  color: #4b5563;
+}
+
+/* Desktop Responsiveness */
+@media (min-width: 640px) {
+  .nav-btn {
+    display: flex;
+  }
+}

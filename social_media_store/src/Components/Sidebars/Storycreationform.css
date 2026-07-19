@@ -1,0 +1,183 @@
+/* Card Container Layout */
+.story-form-card {
+  max-width: 500px;
+  margin: 2rem auto;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.form-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.story-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Upload Dropzone Styling */
+.upload-zone {
+  width: 100%;
+  height: 220px;
+  border: 2px dashed #e5e7eb;
+  border-radius: 12px;
+  background: #f9fafb;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+.upload-zone:hover {
+  border-color: #4f46e5;
+}
+
+.upload-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  gap: 10px;
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.upload-icon {
+  width: 40px;
+  height: 40px;
+  color: #9ca3af;
+}
+
+.file-input-hidden {
+  display: none;
+}
+
+/* Media Preview Elements */
+.preview-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.media-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.preview-caption-overlay {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  max-width: 80%;
+  text-align: center;
+  backdrop-filter: blur(4px);
+}
+
+.remove-preview-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+.remove-preview-btn:hover {
+  background: rgba(220, 38, 38, 0.9);
+}
+
+/* Input Fields Groups */
+.input-fields-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.input-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field-label {
+  font-size: 0.815rem;
+  font-weight: 500;
+  color: #4b5563;
+}
+
+.text-field {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.925rem;
+  color: #111827;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.text-field:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.text-field:disabled {
+  background: #f3f4f6;
+  cursor: not-allowed;
+}
+
+/* Submission Button with Loading States */
+.publish-story-btn {
+  width: 100%;
+  background: #4f46e5;
+  color: #ffffff;
+  padding: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.publish-story-btn:hover:not(:disabled) {
+  background: #4338ca;
+}
+
+.publish-story-btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.publish-story-btn:disabled {
+  background: #9ca3af;
+  opacity: 0.6;
+  cursor: not-allowed;
+}

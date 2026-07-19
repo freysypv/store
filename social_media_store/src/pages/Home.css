@@ -10,6 +10,34 @@
   width: 90%; /* Prevents the container from clipping on tiny screens */
 } 
 
+.custom-app-btn {
+  background-color: #0e078f;
+  color: #ffffff;
+  padding: 10px;
+  margin: 5px;
+  align-items: space-between;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.custom-app-btn:hover:not(:disabled) {
+  background-color: #5647fb;
+}
+
+.custom-app-btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.custom-app-btn:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
 .contact-form-title { 
   margin-top: 0; 
   margin-bottom: 20px; 
