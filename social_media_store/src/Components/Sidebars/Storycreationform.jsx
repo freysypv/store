@@ -39,7 +39,7 @@ function CreateStoryForm({ onStorySubmit }) {
 
   return (
     <div className="story-form-card">
-      <h2 className="form-title">Create New 24h Update</h2>
+      <h2 className="form-title">Create New Story</h2>
 
       <form onSubmit={handleSubmit} className="story-form">
         {/* Media Upload Area */}

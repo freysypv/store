@@ -12,7 +12,7 @@ function Product(props) {
         {
           <label>
             {[props.data.price.toFixed(2)]}
-          </label> /*to Fixed = round up the price to 2 decimal places. */
+          </label> 
         }
        
 

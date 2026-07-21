@@ -1,0 +1,131 @@
+/* Layout Wrapper */
+.form-page-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.form-page-container h2 {
+  font-size: 2rem;
+  color: #1a1a1a;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 0.5rem;
+}
+
+/* Card Panel styling matching checkout */
+.form-card-layout {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+}
+
+.product-creation-form h3 {
+  font-size: 1.3rem;
+  color: #2d3748;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+/* Base Form Input Blocks */
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input:not([type="checkbox"]),
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 6px;
+  font-size: 1rem;
+  color: #2d3748;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #3182ce;
+  box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.15);
+}
+
+.form-group textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Side-by-Side Flex Split */
+.form-row-split {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.form-row-split .form-group {
+  flex: 1;
+}
+
+/* Checkbox Alignment Overrides */
+.form-group.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-group.checkbox-group input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  margin: 0;
+}
+
+.form-group.checkbox-group label {
+  display: inline;
+  margin-bottom: 0;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 500;
+}
+
+/* Action Submit Button */
+.submit-product-btn {
+  width: 100%;
+  padding: 1rem;
+  background-color: #10b981; /* Emerald theme for positive product creation */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submit-product-btn:hover {
+  background-color: #059669;
+}
+
+/* Responsive adjustments for narrow viewports */
+@media (max-width: 480px) {
+  .form-row-split {
+    flex-direction: column;
+    gap: 0;
+  }
+}

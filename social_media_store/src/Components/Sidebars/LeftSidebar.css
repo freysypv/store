@@ -1,18 +1,34 @@
+:root {
+  --sidebar-bg: #e8f3f7;
+  --sidebar-hover-bg: #d3e9f0;
+  --sidebar-radius: 8px;
+  --sidebar-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.15);
+  --sidebar-text: #0a0a09;
+  --logout-bg: #580303;
+  --logout-hover-bg: #7b5454;
+  --logout-text: #f8f5f5;
+}
+
 .left-sidebar {
-  width: 200px;
-  position: fixed;
-  height: calc(75vh - 100px);
-  left: 8px;
-  background-color: #e8f3f7;
-  justify-content: flex-start;
   display: flex;
   flex-direction: column;
-  padding: 12px;
-  margin-bottom: 20%;
+  justify-content: flex-start;
+  width: 200px;
+  height: calc(75vh - 100px);
+  position: fixed;
+  left: 8px;
   margin: 12px;
-  box-shadow: 0 0 4px 4px ;
+  padding: 12px;
   box-sizing: border-box;
-  border-radius: 8px 8px 8px 8px ;
+  background-color: var(--sidebar-bg);
+  border-radius: var(--sidebar-radius);
+  box-shadow: var(--sidebar-shadow);
+}
+
+.logo-title {
+  color: var(--sidebar-text);
+  font-family: cursive;
+  font-weight: 700;
 }
 
 .react-icons-container {
@@ -20,36 +36,47 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 15px;
-  color: black;
   margin-top: 20px;
-  border: solid 1px rgb(214, 205, 101);
-  
+  padding: 10px;
+  color: var(--sidebar-text);
+  border: 1px solid rgb(214, 205, 101);
 }
-.logo-title {
-  color: rgb(10, 10, 9);
-  text-emphasis: none;
-  font-family: cursive;
-  font-weight: 700;
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 6px;
+  color: var(--sidebar-text);
+  text-decoration: none;
+  font-size: 15px;
+  transition: background-color 0.15s ease;
+}
+
+.nav-link:hover {
+  background-color: var(--sidebar-hover-bg);
 }
 
 .sidebar-footer {
-  margin-top: auto; 
+  margin-top: auto;
 }
 
 .logout-btn {
   width: 100%;
   padding: 10px;
-  background-color: #580303;
-  color: #f8f5f5;
   border: none;
   border-radius: 12px;
-  cursor: pointer;
-  font-weight: 700;
-  box-shadow: 4px #580303;
+  background-color: var(--logout-bg);
+  color: var(--logout-text);
   font-size: 1rem;
-  
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(88, 3, 3, 0.5);
+  transition: background-color 0.15s ease;
 }
 
 .logout-btn:hover {
-  background-color: #7b5454;
+  background-color: var(--logout-hover-bg);
 }

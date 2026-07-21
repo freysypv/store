@@ -1,10 +1,9 @@
-
 .container {
   display: flex;
   width: 200px;
   height: calc(75vh - 40px); 
   position: fixed;
-  right: 80px; 
+  right: 20px;
   top: 160px;
   background-color: #b5e3f4;
   flex-direction: column;
@@ -12,8 +11,6 @@
   box-sizing: border-box;
   border-radius: 8px;
   overflow-y: auto; 
-
-  
 }
 
 .search-bar {
@@ -38,8 +35,6 @@
   flex-direction: column; 
 }
 
-
-
 /* ads Card Container */
 .ad-banner {
   position: relative;
@@ -50,15 +45,12 @@
   overflow: hidden;  
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   margin-top: auto;
-
 }
 
 /* Sponsored Tag Badge */
 .ad-tag {
   position: absolute;
-  /* top: 12px;
-  left: 12px; */
-  z-index: 10;       /* Forces badge to float above the image */
+  z-index: 10;
   background-color: rgba(0, 0, 0, 0.65);
   backdrop-filter: blur(4px);
   color: #ffffff;
@@ -77,15 +69,124 @@
   width: 100%;
   height: 100%;
   object-fit: cover;       
-  object-position: center; /* Ensures the main billboard subject stays focused */
+  object-position: center;
   transition: transform 0.3s ease; 
   cursor: pointer;
 }
 
-
 .ad-banner:hover img {
-  transform: scale(1.03); /* Subtle zoom when a user hovers over the ad */
+  transform: scale(1.03);
 }
 
+/* ---------- Card / trend / follow styles ---------- */
 
+.sticky-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 
+.card {
+  background-color: #bfdae0;
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: black;
+  margin: 0 0 8px;
+}
+
+.trends-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.trend-item {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+}
+
+.trend-item:last-child {
+  border-bottom: none;
+}
+
+.trend-meta {
+  font-size: 11px;
+  color: #3a5a63;
+}
+
+.trend-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: black;
+  margin: 2px 0;
+}
+
+.follow-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.follow-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  gap: 8px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #9bd4e6;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.user-info .trend-name {
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-info .trend-name:last-child {
+  font-weight: 400;
+  color: #3a5a63;
+}
+
+.btn-follow {
+  background-color: black;
+  color: #ffffff;
+  border: none;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: opacity 0.15s ease;
+}
+
+.btn-follow:hover {
+  opacity: 0.8;
+}
