@@ -1,23 +1,25 @@
-import { useState } from "react";
-import DataService from "../services/DataService";
-import ProductCreationForm from "./ProductCreationForm";
-import Catalog from "./Catalog";
+import { useState } from 'react';
+import DataService from '../services/DataService';
+import Catalog from './Catalog';
+import ProductForm from './ProductForm';
+import { addProduct } from '../Services/ProductService';
 
-function AdminInventory() {
-  const service = new DataService();
+const service = new DataService();
+
+function ProductCreationForm() {
   const [refreshKey, setRefreshKey] = useState(0);
 
   const handleProductCreate = (newProduct) => {
     service.addProduct(newProduct);
-    setRefreshKey(prev => prev + 1); // forces Catalog to re-fetch
+    setRefreshKey((prev) => prev + 1); // forces Catalog to re-fetch
   };
 
   return (
     <div>
-      <ProductCreationForm onProductCreate={handleProductCreate} />
+      <ProductForm onProductCreate={handleProductCreate} />
       <Catalog key={refreshKey} />
     </div>
   );
 }
 
-export default AdminInventory;
+export default ProductCreationForm;

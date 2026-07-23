@@ -20,7 +20,7 @@ const Catalog = [
     name: "Stainless Steel Water Bottle",
     price: 29.99,
     category: "Fitness",
-    inStock: false,
+    inStock: true,
     imageUrl: "https://images.unsplash.com/photo-1544003484-3cd181d17917?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8d2F0ZXIlMjBib3R0bGV8ZW58MHx8MHx8fDA%3D"
   },
   {
@@ -175,17 +175,16 @@ const Catalog = [
   },
 ];
 
-class dataService {
+class DataService {
   getProducts() {
     return Catalog;
   }
 
   addProduct(product) {
-    Catalog.push(product);
+    const newId = Math.max(...Catalog.map(p => p.id), 0) + 1;
+    Catalog.push({ id: newId, ...product });
     return Catalog;
   }
 }
 
-
-
-export default dataService;
+export default DataService;

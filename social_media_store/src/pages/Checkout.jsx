@@ -41,6 +41,10 @@ export function Checkout() {
     clearCart(); // Wipes local context cart state clean
   };
 
+  useEffect(() => {
+    setProducts(getProducts());
+  }, []);
+
   if (orderPlaced) {
     return (
       <div className="checkout-success">

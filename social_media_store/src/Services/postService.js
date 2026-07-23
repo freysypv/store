@@ -3,8 +3,9 @@ const STORAGE_KEY = 'social_feed_posts';
 const seedPosts = [
   {
     id: "1719820800000",
-    user: "GraphQL Expert",
-    username: "@graphql_dev2",
+    userId: "usr_9482f3a",
+    user: "Alex Chen",
+    username: "@alexchen",
     avatar: "https://picsum.photos/300",
     date: "7/1/2026",
     text: "Just completed the migration of our legacy microservices over to a unified GraphQL gateway. The latency drops are absolutely beautiful!",
@@ -15,8 +16,9 @@ const seedPosts = [
   },
   {
     id: "1719907200000",
-    user: "UI Designer",
-    username: "@css_vibe",
+    userId: "usr_9482f3a",
+    user: "Alex Chen",
+    username: "@alexchen",
     avatar: "https://picsum.photos/300",
     date: "7/2/2026",
     text: "Can we all agree that naming CSS variables is the absolute hardest part of frontend engineering? 'primary-dark-v2-final-fixed' is my current vibe.",
@@ -27,6 +29,7 @@ const seedPosts = [
   },
   {
     id: "1719993600000",
+    userId: "usr_other1",
     user: "Early Bird Coder",
     username: "@coffee_code",
     avatar: "https://picsum.photos/300",
@@ -39,6 +42,7 @@ const seedPosts = [
   },
   {
     id: "1721095800000",
+    userId: "usr_other2",
     user: "Nature Stroller",
     username: "@green_steps",
     avatar: "https://picsum.photos/300",
@@ -51,6 +55,7 @@ const seedPosts = [
   },
   {
     id: "1721095900000",
+    userId: "usr_other3",
     user: "Boot Enthusiast",
     username: "@leather_sole",
     avatar: "https://picsum.photos/300",
@@ -63,6 +68,7 @@ const seedPosts = [
   },
   {
     id: "1721096000000",
+    userId: "usr_other4",
     user: "Daily Walk Tracker",
     username: "@step_counter",
     avatar: "https://picsum.photos/300",
@@ -75,6 +81,7 @@ const seedPosts = [
   }
 ];
 
+// Synchronous read/write helpers (used internally and by profile posts)
 function loadPosts() {
   const saved = localStorage.getItem(STORAGE_KEY);
   if (saved) {
@@ -93,17 +100,54 @@ function savePosts(posts) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
 }
 
-export const getPosts = async (page = 1, limit = 10) => {
-  await new Promise((resolve) => setTimeout(resolve, 500));
+// Get posts belonging to a specific user (synchronous — safe to call directly in useState)
+function getPostsByUser(userId) {
+  return loadPosts().filter((post) => post.userId === userId);
+}
+
+// Async feed-style getter (used by feed/catalog-style components expecting a Promise)
+async function getPosts(page = 1, limit = 50) {
+  await new Promise((resolve) => setTimeout(resolve, 300));
 
   const posts = loadPosts();
   const startIndex = (page - 1) * limit;
   const endIndex = page * limit;
 
   return posts.slice(startIndex, endIndex);
-};
+}
 
-export const createPost = async (newPostData) => {
+// Delete a post by id
+function deletePost(id) {
+  try {
+    const posts = loadPosts().filter((p) => p.id !== id);
+    savePosts(posts);
+    return posts;
+  } catch (err) {
+    console.error('Failed to delete post from localStorage:', err);
+    return loadPosts();
+  }
+}
+
+// Add a post synchronously (for profile-style quick-add use)
+function addPost(post) {
+  try {
+    const posts = loadPosts();
+    const newPost = {
+      id: `post_${Date.now()}`,
+      timestamp: new Date().toLocaleString(),
+      ...post,
+    };
+    const updated = [newPost, ...posts];
+    savePosts(updated);
+    return updated;
+  } catch (err) {
+    console.error('Failed to save post to localStorage:', err);
+    return loadPosts();
+  }
+}
+
+// Async create (matches feed-style creation flow)
+async function createPost(newPostData) {
   await new Promise((resolve) => setTimeout(resolve, 300));
 
   const posts = loadPosts();
@@ -118,4 +162,17 @@ export const createPost = async (newPostData) => {
   savePosts(updated);
 
   return createdPost;
+}
+
+// one single default export at the very end
+const postService = {
+  loadPosts,
+  savePosts,
+  getPosts,
+  getPostsByUser,
+  deletePost,
+  addPost,
+  createPost,
 };
+
+export default postService;

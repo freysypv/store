@@ -1,8 +1,7 @@
 import { FaShoppingCart, FaUser, FaHeart, FaHome, FaBookOpen } from 'react-icons/fa';
-import { MdOutlineLocalShipping } from 'react-icons/md';
-import './LeftSidebar.css';
-import { Link } from 'react-router-dom';
 import { PlusCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import './LeftSidebar.css';
 
 const NAV_ITEMS = [
   { path: '/', label: 'Home', Icon: FaHome, size: 24 },
@@ -11,7 +10,6 @@ const NAV_ITEMS = [
   { path: '/cart', label: 'Cart', Icon: FaShoppingCart, size: 24, color: '#474141' },
   { path: '/favorites', label: 'Favorite', Icon: FaHeart, size: 24, color: 'red' },
   { path: '/product-creation-form', label: 'Add Product', Icon: PlusCircle, size: 28 },
-  // { path: '//product-creation-form', label: '', Icon: , size: 28 },
 ];
 
 function LeftSidebar() {
@@ -26,8 +24,6 @@ function LeftSidebar() {
           </Link>
         ))}
       </div>
-
-        
     </aside>
   );
 }
