@@ -97,7 +97,14 @@ function loadPosts() {
 }
 
 function savePosts(posts) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+  } catch (err) {
+    if (err.name === 'QuotaExceededError') {
+      throw new Error('Storage is full. Try removing some old posts or using a smaller image.');
+    }
+    throw err;
+  }
 }
 
 // Get posts belonging to a specific user (synchronous — safe to call directly in useState)

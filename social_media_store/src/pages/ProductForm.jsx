@@ -1,24 +1,68 @@
 import { useState } from 'react';
 import './Productcreation.css';
 
+const compressImage = (file, maxWidth = 600, quality = 0.7) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const scale = Math.min(1, maxWidth / img.width);
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
+
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.onerror = reject;
+      img.src = event.target.result;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+};
+
 function ProductForm({ onProductCreate }) {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState('');
   const [description, setDescription] = useState('');
-  const [image, setImage] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+  const [imageError, setImageError] = useState('');
+
+  const handleImageChange = async (e) => {
+    const file = e.target.files[0];
+    setImageError('');
+    if (!file) return;
+
+    if (file.size > 1.5 * 1024 * 1024) {
+      setImageError('Image is too large. Please select a photo under 1.5MB.');
+      return;
+    }
+
+    try {
+      const compressed = await compressImage(file);
+      setImageUrl(compressed);
+    } catch (err) {
+      console.error('Failed to process image:', err);
+      setImageError('Failed to process image. Please try another photo.');
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!name.trim() || !price || !category) return;
 
     const newProduct = {
-      id: Date.now(),
       name: name.trim(),
       price: parseFloat(price),
       category,
       description: description.trim(),
-      image: image.trim(),
+      imageUrl,
+      inStock: true,
     };
 
     onProductCreate(newProduct);
@@ -26,7 +70,7 @@ function ProductForm({ onProductCreate }) {
     setPrice('');
     setCategory('');
     setDescription('');
-    setImage('');
+    setImageUrl('');
   };
 
   return (
@@ -50,7 +94,6 @@ function ProductForm({ onProductCreate }) {
           <option value="electronics">Electronics</option>
           <option value="beauty">Beauty</option>
           <option value="other">Other</option>
-          <option value="electronics">Electronics</option>
           <option value="furniture">Furniture</option>
           <option value="fitness">Fitness</option>
           <option value="fitness-outdoor">Fitness & Outdoor</option>
@@ -64,9 +107,15 @@ function ProductForm({ onProductCreate }) {
         <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
       </label>
       <label>
-        Image URL
-        <input value={image} onChange={(e) => setImage(e.target.value)} />
+        Product Photo
+        <input type="file" accept="image/*" onChange={handleImageChange} />
       </label>
+      {imageError && <p className="product-form-error">{imageError}</p>}
+      {imageUrl && (
+        <div className="product-form-preview">
+          <img src={imageUrl} alt="Product preview" className="product-form-preview-img" />
+        </div>
+      )}
       <button type="submit">Add Product</button>
     </form>
   );

@@ -5,6 +5,7 @@ const DEFAULT_PROFILE = {
   name: 'Joseph Dias',
   title: 'FS Developer',
   avatarUrl: UserActivation.avatarUrl,
+  coverUrl: 'https://picsum.photos/id/29/1200/400',
   joinedDate: '2024-03-15',
   isActive: true,
   email: 'alex.chen@company.com',
@@ -31,7 +32,9 @@ function saveProfile(profile) {
   } catch (err) {
     console.error('Failed to save profile to localStorage:', err);
     return getProfile();
+    throw new Error('Storage is full. Try using a smaller image.');
   }
+   throw err;
 }
 
 // Update only some fields of the profile

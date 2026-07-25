@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import "./CreatePost.css";
-import * as PostService from "../../services/postService";
+import PostService from "../../services/postService";
 import { useAuth } from "../../Features/AuthForm";
 
 export default function CreatePost({ onPostCreated }) {
@@ -9,7 +9,31 @@ export default function CreatePost({ onPostCreated }) {
   const [imagePreview, setImagePreview] = useState(null);
   const [error, setError] = useState('');
 
-  const handleImageChange = (e) => {
+  const compressImage = (file, maxWidth = 800, quality = 0.7) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const scale = Math.min(1, maxWidth / img.width);
+          canvas.width = img.width * scale;
+          canvas.height = img.height * scale;
+
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+          resolve(canvas.toDataURL('image/jpeg', quality));
+        };
+        img.onerror = reject;
+        img.src = event.target.result;
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const handleImageChange = async (e) => {
     const file = e.target.files[0];
     setError('');
     if (file) {
@@ -17,11 +41,13 @@ export default function CreatePost({ onPostCreated }) {
         setError('Image is too large. Please select a photo under 1.5MB.');
         return;
       }
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview(reader.result);
-      };
-      reader.readAsDataURL(file);
+      try {
+        const compressed = await compressImage(file);
+        setImagePreview(compressed);
+      } catch (err) {
+        console.error('Failed to process image:', err);
+        setError('Failed to process image. Please try another photo.');
+      }
     }
   };
 
@@ -56,7 +82,7 @@ export default function CreatePost({ onPostCreated }) {
       setImagePreview(null);
     } catch (err) {
       console.error('Failed to save post:', err);
-      setError('Failed to save post. Please try again.');
+      setError(err.message || 'Failed to save post. Please try again.');
     }
   };
 
@@ -90,7 +116,7 @@ export default function CreatePost({ onPostCreated }) {
         {error && <p className="create-post-card__error-msg">{error}</p>}
         <div className="create-post-card__actions">
           <label htmlFor="file-upload" className="create-post-card__upload-label">
-            🖼️ Add Photo
+            Add Photo
             <input
               id="file-upload"
               type="file"

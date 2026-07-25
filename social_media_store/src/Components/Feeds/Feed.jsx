@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import PostCard from './PostCard';
-import * as PostService from "../../services/postService";
+import PostService from "../../services/postService";
 
 function Feed() {
   const [items, setItems] = useState([]);

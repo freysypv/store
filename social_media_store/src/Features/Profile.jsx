@@ -1,13 +1,41 @@
 import './profile.css';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import profileService from '../services/profileService';
 import postService from '../services/postService';
 
+const compressImage = (file, maxWidth = 500, quality = 0.7) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const scale = Math.min(1, maxWidth / img.width);
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
+
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.onerror = reject;
+      img.src = event.target.result;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+};
+
 export default function Profile() {
   const [isEditing, setEditing] = useState(false);
   const [activeTab, setActiveTab] = useState('overview');
+  const [photoError, setPhotoError] = useState('');
   const navigate = useNavigate();
+
+  const avatarInputRef = useRef(null);
+  const coverInputRef = useRef(null);
 
   const [user, setUser] = useState(profileService.getProfile());
   const [editedUser, setEditedUser] = useState({ ...user });
@@ -29,22 +57,75 @@ export default function Profile() {
     setEditing(false);
   };
 
-  const defaultAvatar = "https://unsplash.com";
-  const defaultBanner = "https://unsplash.com";
+  const handlePhotoChange = async (e, field, maxWidth) => {
+    const file = e.target.files[0];
+    setPhotoError('');
+    if (!file) return;
+
+    if (file.size > 1.5 * 1024 * 1024) {
+      setPhotoError('Image is too large. Please select a photo under 1.5MB.');
+      return;
+    }
+
+    try {
+      const compressed = await compressImage(file, maxWidth);
+      const updated = profileService.updateProfile({ [field]: compressed });
+      setUser(updated);
+      setEditedUser(prev => ({ ...prev, [field]: compressed }));
+    } catch (err) {
+      console.error('Failed to update photo:', err);
+      setPhotoError(err.message || 'Failed to save photo. Please try again.');
+    }
+  };
+
+  const defaultAvatar = "https://picsum.photos/id/64/300/300";
+  const defaultBanner = "https://picsum.photos/id/29/1200/400";
 
   return (
     <div className='profile-container'>
       <header className='profile-cover-Photo'>
-        <img className="cover-img" src={defaultBanner} alt="Profile cover banner background" />
+        <img className="cover-img" src={user.coverUrl || defaultBanner} alt="Profile cover banner background" />
+        <button
+          type="button"
+          className="btn-change-cover"
+          onClick={() => coverInputRef.current?.click()}
+        >
+          Change Cover Photo
+        </button>
+        <input
+          ref={coverInputRef}
+          type="file"
+          accept="image/*"
+          onChange={(e) => handlePhotoChange(e, 'coverUrl', 1200)}
+          style={{ display: 'none' }}
+        />
       </header>
 
       <section className="profile-header">
-        <img className="profile-avatar" src={user.avatarUrl || defaultAvatar} alt={`Profile headshot of ${user.name}`} />
+        <div className="profile-avatar-wrapper">
+          <img className="profile-avatar" src={user.avatarUrl || defaultAvatar} alt={`Profile headshot of ${user.name}`} />
+          <button
+            type="button"
+            className="btn-change-avatar"
+            onClick={() => avatarInputRef.current?.click()}
+          >
+            Change Photo
+          </button>
+          <input
+            ref={avatarInputRef}
+            type="file"
+            accept="image/*"
+            onChange={(e) => handlePhotoChange(e, 'avatarUrl', 500)}
+            style={{ display: 'none' }}
+          />
+        </div>
         <div className="profile-header-text">
           <h1>{user.name}</h1>
           <p className="profile-subtitle">{user.title}</p>
         </div>
       </section>
+
+      {photoError && <p className="profile-photo-error">{photoError}</p>}
 
       <nav className="profile-tabs" aria-label="Profile sections">
         <button

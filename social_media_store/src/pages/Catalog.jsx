@@ -1,6 +1,6 @@
 import "./catalog.css";
 import { useEffect, useState, useMemo } from "react";
-import DataService from "../services/DataService";
+import { getProducts } from "../Services/productService";
 import QuantityPicker from "../QuantityPicker";
 import { useCart } from "../pages/CartContext"; 
 
@@ -12,8 +12,7 @@ function Catalog() {
 
   // Fetch initial catalog data
   useEffect(() => {
-    const service = new DataService();
-    const data = service.getProducts() || [];
+    const data = getProducts() || [];
     setProducts(data);
 
     // Initialize quantities for all products safely

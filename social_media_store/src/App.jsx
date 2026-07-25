@@ -15,7 +15,7 @@ import { Checkout } from './pages/Checkout';
 import Catalog from './pages/Catalog';
 import { CartProvider } from './pages/CartContext';
 
-import DataService from './services/DataService';
+
 
 // Components
 import Navbar from './Components/Navbar';
@@ -27,11 +27,7 @@ import AuthForm from './Features/AuthForm';
 import ProfileCreationForm from './Features/ProfileCreationForm';
 import Storycreationform from './Components/Sidebars/Storycreationform';
 
-const service = new DataService();
-
 export default function App() {
-  const handleProductCreate = (product) => service.addProduct(product);
-
   return (
     <AuthProvider>
       <CartProvider>
@@ -65,7 +61,7 @@ export default function App() {
                   <Route path="/ProfileCreationForm" element={<ProfileCreationForm />} />
                   <Route
                     path="/product-creation-form"
-                    element={<ProductCreationForm onProductCreate={handleProductCreate} />}
+                    element={<ProductCreationForm />}
                   />
 
                   <Route path="*" element={<h1>404 - Page Not Found</h1>} />
