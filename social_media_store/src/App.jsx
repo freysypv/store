@@ -26,6 +26,7 @@ import LeftSidebar from './Components/Sidebars/LeftSidebar';
 import AuthForm from './Features/AuthForm';
 import ProfileCreationForm from './Features/ProfileCreationForm';
 import Storycreationform from './Components/Sidebars/Storycreationform';
+import ProtectedRoute from './Components/ProctectedRoute';
 
 export default function App() {
   return (
@@ -45,7 +46,7 @@ export default function App() {
                   {/* Authentication Channels */}
                   <Route path="/signin" element={<AuthForm />} />
                   <Route path="/signup" element={<AuthForm />} />
-                  <Route path="/login" element={<AuthForm />} />
+                  
 
                   {/* Standard Core Site Pages */}
                   <Route path="/" element={<Home />} />
@@ -61,7 +62,11 @@ export default function App() {
                   <Route path="/ProfileCreationForm" element={<ProfileCreationForm />} />
                   <Route
                     path="/product-creation-form"
-                    element={<ProductCreationForm />}
+                    element={
+                      <ProtectedRoute>
+                        <ProductCreationForm />
+                      </ProtectedRoute>
+                        }
                   />
 
                   <Route path="*" element={<h1>404 - Page Not Found</h1>} />

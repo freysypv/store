@@ -96,10 +96,10 @@ function ProductForm({ onProductCreate }) {
           <option value="other">Other</option>
           <option value="furniture">Furniture</option>
           <option value="fitness">Fitness</option>
-          <option value="fitness-outdoor">Fitness & Outdoor</option>
+          <option value="fitness-outdoor">Fitness & Outdoor</option>decor
           <option value="kitchenware">Kitchenware</option>
           <option value="apparel-accessories">Apparel & Accessories</option>
-          <option value="home-decor">Home Decor</option>
+          <option value="home-decor">Home decor </option>
         </select>
       </label>
       <label>

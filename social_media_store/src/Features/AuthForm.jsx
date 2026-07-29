@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext(null);
 
+const ADMIN_EMAILS = ['freysypv@gmail.com'];
+
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(() => {
     const savedUser = localStorage.getItem("logged_in_user");
@@ -60,9 +62,13 @@ const AuthForm = () => {
       );
 
       if (validUser) {
-        localStorage.setItem('currentUser', JSON.stringify(validUser));
-        localStorage.setItem('logged_in_user', JSON.stringify(validUser));
-        setUser(validUser);
+        const userWithRole = {
+          ...validUser,
+          isAdmin: ADMIN_EMAILS.includes(validUser.email),
+        };
+        localStorage.setItem('currentUser', JSON.stringify(userWithRole));
+        localStorage.setItem('logged_in_user', JSON.stringify(userWithRole));
+        setUser(userWithRole);
         navigate('/');
       } else {
         alert('Invalid credentials, please try again!');
