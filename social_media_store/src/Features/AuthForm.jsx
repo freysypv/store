@@ -1,6 +1,6 @@
 import React, { useState, createContext, useContext } from 'react';
 import './AuthForm.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 
 // 1. AUTH CONTEXT & PROVIDER
@@ -22,8 +22,47 @@ export function AuthProvider({ children }) {
     setUser(null);
   };
 
+  // Change password for the currently logged-in user
+  const changePassword = (currentPassword, newPassword) => {
+    if (!user) return { success: false, message: "Not logged in." };
+
+    const existingUsers = JSON.parse(localStorage.getItem('registered_users')) || [];
+    const index = existingUsers.findIndex(u => u.email === user.email);
+
+    if (index === -1) return { success: false, message: "User not found." };
+    if (existingUsers[index].password !== currentPassword) {
+      return { success: false, message: "Current password is incorrect." };
+    }
+
+    existingUsers[index].password = newPassword;
+    localStorage.setItem('registered_users', JSON.stringify(existingUsers));
+
+    const updatedUser = { ...user, password: newPassword };
+    localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+    localStorage.setItem('logged_in_user', JSON.stringify(updatedUser));
+    setUser(updatedUser);
+
+    return { success: true, message: "Password updated." };
+  };
+
+  // Reset password via email (no current password required)
+  const resetPassword = (email, newPassword) => {
+    const existingUsers = JSON.parse(localStorage.getItem('registered_users')) || [];
+    const index = existingUsers.findIndex(u => u.email === email);
+
+    if (index === -1) {
+      return { success: false, message: "No account found with that email." };
+    }
+
+    existingUsers[index].password = newPassword;
+    localStorage.setItem('registered_users', JSON.stringify(existingUsers));
+
+    return { success: true, message: "Password reset. Please log in." };
+  };
+
+
   return (
-    <AuthContext.Provider value={{ user, setUser, logout }}>
+    <AuthContext.Provider value={{ user, setUser, logout, changePassword, resetPassword }}>
       {children}
     </AuthContext.Provider>
   );
@@ -119,20 +158,26 @@ const AuthForm = () => {
         </form>
         <p className="auth-toggle-text">
           {isLoginView ? "Don't have an account? " : "Already have an account? "}
-          <span
-            className="auth-toggle-link"
-            onClick={() => setIsLoginView(!isLoginView)}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                setIsLoginView(!isLoginView);
-              }
-            }}
-          >
-            {isLoginView ? 'Sign Up here' : 'Login here'}
-          </span>
-        </p>
+            <span
+              className="auth-toggle-link"
+              onClick={() => setIsLoginView(!isLoginView)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  setIsLoginView(!isLoginView);
+                }
+              }}
+            >
+              {isLoginView ? 'Sign Up here' : 'Login here'}
+            </span>
+          </p>
+
+          {isLoginView && (
+            <p className="auth-toggle-text">
+              <Link to="/forgot-password">Forgot password?</Link>
+            </p>
+          )}
       </div>
     </div>
   );

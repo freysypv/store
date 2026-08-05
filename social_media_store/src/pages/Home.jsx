@@ -33,11 +33,11 @@ function Home() {
     <div className="home-container">
       <h1 className="title">Welcome Home!</h1>
 
-      <button className="custom-app-btn" onClick={() => setShowStoryForm(true)}>
+      <button className="app-btn" onClick={() => setShowStoryForm(true)}>
         + Add Story
       </button>
 
-      <button className="custom-app-btn" onClick={() => setShowPostForm(true)}>
+      <button className="app-btn" onClick={() => setShowPostForm(true)}>
         + Create Post
       </button>
 
@@ -63,9 +63,10 @@ function Home() {
           </div>
         </div>
       )}
-
-      <StoriesCarousel />
-      <Feed />
+      <div className="home-content-2">
+        <StoriesCarousel />
+        <Feed />
+      </div>
     </div>
   );
 }

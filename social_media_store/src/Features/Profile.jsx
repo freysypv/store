@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import profileService from '../services/profileService';
 import postService from '../services/postService';
 
+const DEFAULT_AVATAR = "https://picsum.photos/id/64/300/300";
+const DEFAULT_BANNER = "https://picsum.photos/id/29/1200/400";
+
 const compressImage = (file, maxWidth = 500, quality = 0.7) => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -32,6 +35,7 @@ export default function Profile() {
   const [isEditing, setEditing] = useState(false);
   const [activeTab, setActiveTab] = useState('overview');
   const [photoError, setPhotoError] = useState('');
+  const [isUploadingPhoto, setUploadingPhoto] = useState(false);
   const navigate = useNavigate();
 
   const avatarInputRef = useRef(null);
@@ -39,7 +43,14 @@ export default function Profile() {
 
   const [user, setUser] = useState(profileService.getProfile());
   const [editedUser, setEditedUser] = useState({ ...user });
-  const [posts, setPosts] = useState(() => postService.getPostsByUser(user.id));
+  const [posts, setPosts] = useState(() => {
+    try {
+      return postService.getPostsByUser(user.id) || [];
+    } catch (err) {
+      console.error('Failed to load posts:', err);
+      return [];
+    }
+  });
 
   const handleInputChanges = (e) => {
     const { name, value } = e.target;
@@ -67,6 +78,9 @@ export default function Profile() {
       return;
     }
 
+    if (isUploadingPhoto) return; // guard against duplicate submissions
+    setUploadingPhoto(true);
+
     try {
       const compressed = await compressImage(file, maxWidth);
       const updated = profileService.updateProfile({ [field]: compressed });
@@ -75,20 +89,20 @@ export default function Profile() {
     } catch (err) {
       console.error('Failed to update photo:', err);
       setPhotoError(err.message || 'Failed to save photo. Please try again.');
+    } finally {
+      setUploadingPhoto(false);
     }
   };
-
-  const defaultAvatar = "https://picsum.photos/id/64/300/300";
-  const defaultBanner = "https://picsum.photos/id/29/1200/400";
 
   return (
     <div className='profile-container'>
       <header className='profile-cover-Photo'>
-        <img className="cover-img" src={user.coverUrl || defaultBanner} alt="Profile cover banner background" />
+        <img className="cover-img" src={user.coverUrl || DEFAULT_BANNER} alt="Profile cover banner background" />
         <button
           type="button"
           className="btn-change-cover"
           onClick={() => coverInputRef.current?.click()}
+          disabled={isUploadingPhoto}
         >
           Change Cover Photo
         </button>
@@ -103,11 +117,12 @@ export default function Profile() {
 
       <section className="profile-header">
         <div className="profile-avatar-wrapper">
-          <img className="profile-avatar" src={user.avatarUrl || defaultAvatar} alt={`Profile headshot of ${user.name}`} />
+          <img className="profile-avatar" src={user.avatarUrl || DEFAULT_AVATAR} alt={`Profile headshot of ${user.name}`} />
           <button
             type="button"
             className="btn-change-avatar"
             onClick={() => avatarInputRef.current?.click()}
+            disabled={isUploadingPhoto}
           >
             Change Photo
           </button>
@@ -154,38 +169,49 @@ export default function Profile() {
               <span className="view-label">Bio:</span>
               <p className="view-bio">{user.bio || 'No bio written yet'}</p>
             </div>
-            <button type="button" className="btn-edit" onClick={() => setEditing(true)}>
-              Edit Profile </button>
+
+            <div className="profile-btn-group">
+              <button type="button" className="btn-edit" onClick={() => setEditing(true)}>
+                Edit Profile
+              </button>
+
+              <button
+                type="button"
+                className="btn-edit"
+                onClick={() => navigate('/change-password')}
+              >
+                Change Password
+              </button>
+            </div>
+
             <div className="profile-create-profile">
+              <button
+                type="button"
+                onClick={() => navigate('/ProfileCreationForm')}
+                className="btn-submit"
+              >
+                Create Profile
+              </button>
+            </div>
 
-            <button
-              type="button"
-              onClick={() => navigate('/ProfileCreationForm')}
-              className="btn-submit"
-            >
-              Create Profile
-            </button>
-          </div>
-
-          <section className="profile-posts-section">
-            <h2 className="posts-heading">Posts</h2>
-            {posts.length === 0 ? (
-              <p className="no-posts">No posts yet.</p>
-            ) : (
-              <div className="posts-grid">
-                {posts.map((post) => (
-                  <div key={post.id} className="post-card">
-                    {post.image && (
-                      <img src={post.image} alt="" className="post-image" />
-                    )}
-                    <p className="post-content">{post.text}</p>
-                    <span className="post-date">{post.date}</span>
-                  </div>
-                ))}
-              </div>
-            )}
-          </section>
-
+            <section className="profile-posts-section">
+              <h2 className="posts-heading">Posts</h2>
+              {posts.length === 0 ? (
+                <p className="no-posts">No posts yet.</p>
+              ) : (
+                <div className="posts-grid">
+                  {posts.map((post) => (
+                    <div key={post.id} className="post-card">
+                      {post.image && (
+                        <img src={post.image} alt="" className="post-image" />
+                      )}
+                      <p className="post-content">{post.text}</p>
+                      <span className="post-date">{post.date}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </section>
           </article>
         ) : (
           <form className="profile-form" onSubmit={(e) => { e.preventDefault(); handleSave(); }}>
@@ -213,7 +239,6 @@ export default function Profile() {
               <button type="submit" className="btn-submit">Save Changes</button>
               <button type="button" onClick={handleCancel} className="btn-cancel">Cancel</button>
             </div>
-
           </form>
         )}
       </main>

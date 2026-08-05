@@ -1,168 +1,110 @@
-.contact-form-container { 
-  max-width: 500px; 
-  margin: 40px auto; 
-  padding: 30px; 
-  border: 1px solid #67677c; 
-  border-radius: 8px; 
-  background-color: #f8f5f5; 
-  box-shadow: 0 4px 12px rgba(143, 140, 140, 0.05); 
-  box-sizing: border-box; 
-  width: 90%; /* Prevents the container from clipping on tiny screens */
-} 
+/* Container Layout */
+.home-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  padding: 2rem;
+  width: 100%;
+  justify-items: start;   
+  margin: 0 auto;
+  font-family: system-ui, -apple-system, sans-serif;
+}
 
-.custom-app-btn {
-  background-color: #0e078f;
+.title {
+  font-size: 2.5rem;
+  color: #d0f4fc;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  justify-self: center;
+  text-align: center; 
+}
+
+/* Dashboard Action Buttons */
+.app-btn {
+  background-color: #0076ff;
   color: #ffffff;
-  padding: 10px;
-  margin: 5px;
-  align-items: space-between;
-  font-size: 0.95rem;
-  font-weight: 600;
   border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
   border-radius: 8px;
   cursor: pointer;
+  margin: 0 auto;
+  width: 200px;
+  text-align: center;
   transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-.custom-app-btn:hover:not(:disabled) {
-  background-color: #5647fb;
+.app-btn:hover {
+  background-color: #005ecb;
 }
 
-.custom-app-btn:active:not(:disabled) {
+.app-btn:active {
   transform: scale(0.98);
 }
 
-.custom-app-btn:disabled {
-  background-color: #9ca3af;
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-
-.contact-form-title { 
-  margin-top: 0; 
-  margin-bottom: 20px; 
-  font-size: 1.8rem; 
-  color: #0c0c0c; 
-  font-family: system-ui, -apple-system, sans-serif; 
-} 
-
-.status-message { 
-  padding: 12px; 
-  border-radius: 6px; 
-  font-weight: 500; 
-  margin-bottom: 20px; 
-  font-size: 0.95rem; 
-  font-family: system-ui, -apple-system, sans-serif; 
-} 
-
-.status-success { 
-  background-color: #f0f4ec; 
-  color: #1e4620; 
-  border: 1px solid #b8d5a0; 
-} 
-
-.status-error { 
-  background-color: #fce8e6; 
-  color: #a51d24; 
-  border: 1px solid #f7c3bf; 
-} 
-
-.contact-form { 
-  display: flex; 
-  flex-direction: column; 
-} 
-
-.form-group { 
-  margin-bottom: 20px; 
-} 
-
-.form-label { 
-  display: block; 
-  margin-bottom: 6px; 
-  font-weight: 500; 
-  font-size: 1rem; 
-  color: #090808; 
-  font-family: system-ui, -apple-system, sans-serif; 
-} 
-
-.form-input, .form-textarea { 
-  width: 100%; 
-  padding: 10px; 
-  border: 1px solid #cccccc; 
-  border-radius: 6px; 
-  font-family: system-ui, -apple-system, sans-serif; 
-  font-size: 1rem; 
-  box-sizing: border-box; 
-  transition: border-color 0.2s, box-shadow 0.2s; 
-  background-color: #ffffff; 
-} 
-
-.form-input:focus, .form-textarea:focus { 
-  outline: none; 
-  border-color: #0066cc; 
-  box-shadow: 0 0 0 3px rgba(161, 203, 235, 0.25); 
-} 
-
-.form-textarea { 
-  resize: vertical; 
-} 
-
-.form-submit-btn { 
-  width: 100%; 
-  padding: 12px; 
-  background-color: #0066cc; 
-  color: #ffffff; 
-  border: none; 
-  border-radius: 6px; 
-  font-size: 1rem; 
-  font-weight: 600; 
-  font-family: system-ui, -apple-system, sans-serif; 
-  cursor: pointer; 
-  transition: background-color 0.2s; 
-} 
-
-/* Interactive Hover Link */ 
-.form-submit-btn:hover:not(:disabled) { 
-  background-color: #0052a3; 
-} 
-
-/* Disabled Submit Button State */ 
-.form-submit-btn:disabled { 
-  background-color: #cccccc; 
-  color: #666666; 
-  cursor: not-allowed; 
-} 
-
-/* --- RESPONSIVE BREAKPOINTS (FIXED DESIGN) --- */
-
-/* 1. DEFAULT BASE MOBILE (0px to 480px) */
-.home { 
+/* Modal Overlay (Background Dimming) */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  flex-direction: column; /* Stack elements layout */ 
-  gap: 4px; 
-  font-size: 12px; 
-  padding: 8px;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px); /* Modern blur effect */
 }
 
-/* 2. TABLETS (481px to 768px) */
-@media (min-width: 481px) { 
-  .home { 
-    flex-direction: row; /* Change to side-by-side layout */ 
-    gap: 8px; 
-    font-size: 14px; 
-    padding: 10px 14px; 
-  } 
-} 
+/* Modal Content Box */
+.modal-content {
+  background-color: #ffffff;
+  padding: 2.5rem;
+  border-radius: 12px;
+  position: relative;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  animation: modalSlideUp 0.3s ease-out;
+}
 
-/* 3. DESKTOPS / LAPTOPS (769px and up) */ 
-@media (min-width: 769px) { 
-  .home { 
-    font-size: 16px; 
-    color: #1a202c; 
-  } 
-  
-  .home:hover { 
-    color: #3182ce; 
-    transform: translateY(-1px); /* Gentle lift effect */ 
-  } 
+/* Quick Corner Close Button */
+.modal-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: #666666;
+  cursor: pointer;
+  padding: 0.25rem;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.home-content-2 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  align-items: start;
+}
+
+.modal-close-btn:hover {
+  color: #1a1a1a;
+}
+
+/* Entrance Animation */
+@keyframes modalSlideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

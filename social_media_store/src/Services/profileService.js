@@ -4,7 +4,7 @@ const DEFAULT_PROFILE = {
   id: 'usr_9482f3a',
   name: 'Joseph Dias',
   title: 'FS Developer',
-  avatarUrl: UserActivation.avatarUrl,
+  avatarUrl: 'https://picsum.photos/id/64/300/300', // fixed
   coverUrl: 'https://picsum.photos/id/29/1200/400',
   joinedDate: '2024-03-15',
   isActive: true,

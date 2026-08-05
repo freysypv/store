@@ -9,7 +9,7 @@ const seedPosts = [
     avatar: "https://picsum.photos/300",
     date: "7/1/2026",
     text: "Just completed the migration of our legacy microservices over to a unified GraphQL gateway. The latency drops are absolutely beautiful!",
-    image: "https://picsum.photos/300",
+    image: "https://images.unsplash.com/photo-1785714690745-476915e48181?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDZ8NnNNVmpUTFNrZVF8fGVufDB8fHx8fA%3D%3D",
     timestamp: "7/1/2026, 10:14:22 AM",
     likes: 42,
     comments: []
@@ -22,7 +22,7 @@ const seedPosts = [
     avatar: "https://picsum.photos/300",
     date: "7/2/2026",
     text: "Can we all agree that naming CSS variables is the absolute hardest part of frontend engineering? 'primary-dark-v2-final-fixed' is my current vibe.",
-    image: null,
+    image: "https://images.unsplash.com/photo-1607706189992-eae578626c86?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     timestamp: "7/2/2026, 2:30:15 PM",
     likes: 128,
     comments: []
@@ -35,7 +35,7 @@ const seedPosts = [
     avatar: "https://picsum.photos/300",
     date: "7/3/2026",
     text: "Early morning debugging sessions hit differently when the coffee is strong and the test suite finally passes on the first try.",
-    image: "https://picsum.photos/300",
+    image: "https://plus.unsplash.com/premium_photo-1726994886611-98810cd48fff?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDF8NnNNVmpUTFNrZVF8fGVufDB8fHx8fA%3D%3D",
     timestamp: "7/3/2026, 6:45:01 AM",
     likes: 56,
     comments: []
@@ -48,7 +48,7 @@ const seedPosts = [
     avatar: "https://picsum.photos/300",
     date: "7/15/2026",
     text: "Clear paths and fresh air. Taking a screen break to clear my head always fixes my creative blocks.",
-    image: "https://picsum.photos",
+    image: "https://images.unsplash.com/photo-1770954098565-481b0771dc47?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw2fHx8ZW58MHx8fHx8",
     timestamp: "7/15/2026, 11:30:00 PM",
     likes: 19,
     comments: []
@@ -61,7 +61,7 @@ const seedPosts = [
     avatar: "https://picsum.photos/300",
     date: "7/15/2026",
     text: "The patina on these brown chukkas is starting to settle in nicely after a mile-long stroll.",
-    image: "https://picsum.photos",
+    image: "https://images.unsplash.com/photo-1729762018388-5c77be44ecb4?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzfHx8ZW58MHx8fHx8",
     timestamp: "7/15/2026, 11:31:40 PM",
     likes: 54,
     comments: []
@@ -74,7 +74,7 @@ const seedPosts = [
     avatar: "https://picsum.photos/300",
     date: "7/15/2026",
     text: "Crushing the daily movement goal before the day ends. Keep moving, everyone!",
-    image: "https://picsum.photos",
+    image: "https://picsum.photos/id/237/200/300",
     timestamp: "7/15/2026, 11:33:15 PM",
     likes: 31,
     comments: []
