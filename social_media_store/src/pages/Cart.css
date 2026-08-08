@@ -6,10 +6,12 @@
   padding: 0 1rem;
 }
 
-.cart-page__title {
+.cart-page-title {
   font-size: 2rem;
-  color: #111827;
+  color: #fcfdfe;
   margin-bottom: 2rem;
+  align-items: center;
+  padding-bottom: 0.5rem;
 }
 
 /* Two-Column Grid Setup */
@@ -32,6 +34,7 @@
   align-items: center;
   gap: 1.5rem;
   padding-bottom: 1.5rem;
+  color: #b9d3f8;
   border-bottom: 1px solid #e5e7eb;
 }
 
@@ -50,24 +53,24 @@
 .cart-item__name {
   margin: 0 0 0.25rem 0;
   font-size: 1.1rem;
-  color: #111827;
+  color: #c8d8fa;
 }
 
 .cart-item__price {
   margin: 0 0 0.25rem 0;
   font-weight: 600;
-  color: #374151;
+  color: #acc8f6;
 }
 
 .cart-item__quantity {
   font-size: 0.875rem;
-  color: #6b7280;
+  color: #c2d3f5;
 }
 
 .cart-item__remove-btn {
   background: none;
   border: none;
-  color: #ef4444;
+  color: #ed7979;
   font-weight: 500;
   cursor: pointer;
   padding: 0.5rem;

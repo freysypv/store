@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, useCallback, useMemo } from 'react';
+import { createContext, useContext, useEffect, useState, useCallback, useMemo, memo } from 'react';
 
 const STORAGE_KEY = 'social_follow_data';
 
@@ -12,24 +12,45 @@ const MOCK_USERS = [
 
 const SEED_FOLLOWERS = ['u1', 'u3', 'u5'];
 
+const DEFAULT_STATE = {
+  following: {},
+  followers: SEED_FOLLOWERS.reduce((acc, id) => ({ ...acc, [id]: true }), {}),
+};
+
 const FollowContext = createContext(null);
 
-export function loadInitialState() {
+// localStorage isn't guaranteed to exist (e.g. sandboxed/artifact
+// environments) — read and write through safe wrappers instead of
+// letting an unguarded call throw and crash the provider.
+function safeStorageGet(key) {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) return JSON.parse(raw);
-  } catch {}
-  return {
-    following: {},
-    followers: SEED_FOLLOWERS.reduce((acc, id) => ({ ...acc, [id]: true }), {}),
-  };
+    if (typeof localStorage === 'undefined') return null;
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+function safeStorageSet(key, value) {
+  try {
+    if (typeof localStorage === 'undefined') return;
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch {
+    // Storage unavailable or full — state still works in-memory
+    // for the current session, it just won't persist.
+  }
+}
+
+export function loadInitialState() {
+  return safeStorageGet(STORAGE_KEY) ?? DEFAULT_STATE;
 }
 
 export function FollowProvider({ children }) {
   const [data, setData] = useState(loadInitialState);
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    safeStorageSet(STORAGE_KEY, data);
   }, [data]);
 
   const toggleFollow = useCallback((userId) => {
@@ -48,19 +69,17 @@ export function FollowProvider({ children }) {
     [data.following, data.followers]
   );
 
-  // Memoized to prevent heavy recalculations and reference changes on stable renders
   const followingIds = useMemo(() => Object.keys(data.following), [data.following]);
   const followerIds = useMemo(() => Object.keys(data.followers), [data.followers]);
-  const friendIds = useMemo(() => followingIds.filter((id) => data.followers[id]), [followingIds, data.followers]);
+  const friendIds = useMemo(
+    () => followingIds.filter((id) => data.followers[id]),
+    [followingIds, data.followers]
+  );
 
-  const value = useMemo(() => ({
-    toggleFollow,
-    isFollowing,
-    isFriend,
-    followingIds,
-    followerIds,
-    friendIds,
-  }), [toggleFollow, isFollowing, isFriend, followingIds, followerIds, friendIds]);
+  const value = useMemo(
+    () => ({ toggleFollow, isFollowing, isFriend, followingIds, followerIds, friendIds }),
+    [toggleFollow, isFollowing, isFriend, followingIds, followerIds, friendIds]
+  );
 
   return <FollowContext.Provider value={value}>{children}</FollowContext.Provider>;
 }
@@ -71,38 +90,39 @@ export function useFollow() {
   return ctx;
 }
 
-export function Avatar({ name }) {
-  const initials = name
+function getInitials(name) {
+  return name
     .split(' ')
     .map((p) => p[0])
     .join('')
     .slice(0, 2)
     .toUpperCase();
-   return (
-    <div className="avatar">
-      {initials}
-    </div>
-  );
 }
 
-export function FollowButton({ userId, className }) {
+export const Avatar = memo(function Avatar({ name }) {
+  return <div className="avatar">{getInitials(name)}</div>;
+});
+
+export const FollowButton = memo(function FollowButton({ userId, className }) {
   const { isFollowing, toggleFollow, isFriend } = useFollow();
   const following = isFollowing(userId);
   const friend = isFriend(userId);
-  const statusClass = friend ? 'is-Friends' : following ? 'is-Following' : 'is-Follow';
+
+  const handleClick = useCallback(() => toggleFollow(userId), [toggleFollow, userId]);
 
   return (
     <button
-      onClick={() => toggleFollow(userId)}
+      onClick={handleClick}
       className={`${className || ''} follow-button ${friend ? 'is-friend' : following ? 'is-following' : ''}`}
       type="button"
+      aria-pressed={following}
     >
       {friend ? 'Friends' : following ? 'Following' : 'Follow'}
     </button>
   );
-}
+});
 
-export function UserRow({ user }) {
+export const UserRow = memo(function UserRow({ user }) {
   return (
     <div className="user-row">
       <Avatar name={user.name} />
@@ -113,23 +133,25 @@ export function UserRow({ user }) {
       <FollowButton className="follow-button-wrapper" userId={user.id} />
     </div>
   );
-}
+});
 
-export function SummaryBar() {
-  const { followingIds, followerIds, friendIds } = useFollow();
-  
-  const stat = (label, value) => (
+function SummaryStat({ label, value }) {
+  return (
     <div className="summary-stat">
       <div className="summary-value">{value}</div>
       <div className="summary-label">{label}</div>
     </div>
   );
-  
+}
+
+export function SummaryBar() {
+  const { followingIds, followerIds, friendIds } = useFollow();
+
   return (
     <div className="summary-bar">
-      {stat('Following', followingIds.length)}
-      {stat('Followers', followerIds.length)}
-      {stat('Friends', friendIds.length)}
+      <SummaryStat label="Following" value={followingIds.length} />
+      <SummaryStat label="Followers" value={followerIds.length} />
+      <SummaryStat label="Friends" value={friendIds.length} />
     </div>
   );
 }

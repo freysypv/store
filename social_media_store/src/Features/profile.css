@@ -8,6 +8,18 @@
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
+.profile-followers-section {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1rem;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
 /* Cover photo */
 .profile-cover-Photo {
   width: 100%;
@@ -284,6 +296,11 @@
   .profile-container {
     margin: 0;
     border-radius: 0;
+  }
+
+  .profile-followers-section {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
   }
 
   .profile-header {

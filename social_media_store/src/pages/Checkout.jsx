@@ -1,5 +1,5 @@
 // src/pages/Checkout.jsx
-import { useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { useCart } from "./CartContext";
 import "./checkout.css"; 
 
@@ -41,10 +41,6 @@ export function Checkout() {
     clearCart(); // Wipes local context cart state clean
   };
 
-  useEffect(() => {
-    setProducts(getProducts());
-  }, []);
-
   if (orderPlaced) {
     return (
       <div className="checkout-success">
@@ -55,13 +51,13 @@ export function Checkout() {
   }
 
   return (
-    <div className="checkout-page-container">
-      <h2>Checkout Workspace</h2>
+    <div className="checkout-container">
+      <h2 className="checkout-title">Checkout </h2>
       
       <div className="checkout-split-layout">
         {/* Left Side: Shipping / Payment Form */}
         <form onSubmit={handlePlaceOrder} className="checkout-form">
-          <h3>Shipping Particulars</h3>
+          <h3 className="checkout-form-title">Shipping </h3>
           <div className="form-group">
             <label>Full Name</label>
             <input type="text" name="name" value={formData.name} onChange={handleInputChange} required />
@@ -102,5 +98,3 @@ export function Checkout() {
     </div>
   );
 }
-
-

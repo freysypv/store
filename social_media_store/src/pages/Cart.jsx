@@ -13,11 +13,11 @@ function ShoppingCart() {
 
   return (
     <div className="cart-page">
-      <h1 className="cart-page__title">Your Cart</h1>
+      <h1 className="cart-page-title">Your Cart</h1>
       <div className="cart-container">
         <div className="cart-items-list">
           {cartItems.length === 0 ? (
-            <p className="empty-cart-message">Your cart is ßempty.</p>
+            <p className="empty-cart-message">Your cart is empty.</p>
           ) : (
             cartItems.map(item => (
               <div key={item.id} className="cart-item">

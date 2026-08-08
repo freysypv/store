@@ -3,6 +3,7 @@ import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import profileService from '../services/profileService';
 import postService from '../services/postService';
+import FollowersFriends from './FollowersFriends';
 
 const DEFAULT_AVATAR = "https://picsum.photos/id/64/300/300";
 const DEFAULT_BANNER = "https://picsum.photos/id/29/1200/400";
@@ -193,6 +194,9 @@ export default function Profile() {
                 Create Profile
               </button>
             </div>
+            <section className="profile-followers-section">
+              <FollowersFriends />
+            </section>
 
             <section className="profile-posts-section">
               <h2 className="posts-heading">Posts</h2>
