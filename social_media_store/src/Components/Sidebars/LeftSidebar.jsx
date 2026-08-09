@@ -9,7 +9,7 @@ const NAV_ITEMS = [
   { path: '/', label: 'Home', Icon: FaHome, size: 24 },
   { path: '/profile', label: 'Profile', Icon: FaUser, size: 24 },
   { path: '/catalog', label: 'Catalog', Icon: FaBookOpen, size: 24 },
-  { path: '/cart', label: 'Cart', Icon: FaShoppingCart, size: 24, color: '#0a0a0a' },
+  { path: '/cart', label: 'Cart', Icon: FaShoppingCart, size: 24, color: '#67cce9' },
  { path: '/favorites', label: 'Favorite Poducts', Icon: FaHeart, size: 24, color: 'red' },
 ];
  

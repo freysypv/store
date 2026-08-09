@@ -7,7 +7,7 @@ function Footer() {
         {/* Column 1 */} 
         <div className="footer-column"> 
           <h3>About Us</h3> 
-          <p> lorem ipsum dolor sit amet, consectetur adipiscing elit. </p> 
+          <p> A developers group focus on making our custumers vision come to live. </p> 
         </div> 
 
         {/* Column 2 */} 

@@ -55,7 +55,7 @@ export function Checkout() {
       <h2 className="checkout-title">Checkout </h2>
       
       <div className="checkout-split-layout">
-        {/* Left Side: Shipping / Payment Form */}
+    
         <form onSubmit={handlePlaceOrder} className="checkout-form">
           <h3 className="checkout-form-title">Shipping </h3>
           <div className="form-group">

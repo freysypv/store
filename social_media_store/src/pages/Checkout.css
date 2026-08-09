@@ -5,10 +5,16 @@
   padding: 2rem 1rem;
   font-family: system-ui, -apple-system, sans-serif;
 }
+.checkout-form-title{
+  font-size: 1.3rem;
+  color: #ec5c5c;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
 
 .checkout-title {
   font-size: 2rem;
-  color: #070707;
+  color: #f6f6f6;
   margin-bottom: 2rem;
   align-items:center;
   padding-bottom: 0.5rem;
@@ -23,7 +29,7 @@
 
 .checkout-form-title {
   font-size: 1.3rem;
-  color: #090909;
+  color: #0b0b0b;
   margin-top: 0;
   margin-bottom: 1.5rem;
 }
@@ -41,7 +47,7 @@
 .checkout-form h3,
 .checkout-summary-panel h3 {
   font-size: 1.3rem;
-  color: #e41010;
+  color: #0c0b0b;
   margin-top: 0;
   margin-bottom: 1.5rem;
 }
@@ -55,7 +61,7 @@
   display: block;
   font-size: 0.9rem;
   font-weight: 600;
-  color: #060606;
+  color: #121212;
   margin-bottom: 0.5rem;
 }
 
@@ -63,10 +69,10 @@
 .form-group textarea {
   width: 100%;
   padding: 0.75rem;
-  border: 1px solid #0a0a0a;
+  border: 1px solid #0e0e0e;
   border-radius: 6px;
   font-size: 1rem;
-  color: #ebedef;
+  color: #f0ecec;
   box-sizing: border-box;
   transition: border-color 0.2s;
 }
@@ -74,7 +80,7 @@
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #e8eef3;
+  border-color: #ededf7;
 }
 
 .form-group textarea {
@@ -86,7 +92,7 @@
 .place-order-btn {
   width: 100%;
   padding: 1rem;
-  background-color: #3182ce;
+  background-color: #0973d6;
   color: white;
   border: none;
   border-radius: 6px;
@@ -103,7 +109,7 @@
 
 .place-order-btn:disabled {
   background-color: #cbd5e0;
-  color: #718096;
+  color: #2877ef;
   cursor: not-allowed;
 }
 
@@ -120,7 +126,7 @@
   display: flex;
   justify-content: space-between;
   font-size: 0.95rem;
-  color: #4a5568;
+  color: #0a0a0a;
   padding: 0.5rem 0;
 }
 

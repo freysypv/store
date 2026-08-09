@@ -19,9 +19,6 @@ const DEFAULT_STATE = {
 
 const FollowContext = createContext(null);
 
-// localStorage isn't guaranteed to exist (e.g. sandboxed/artifact
-// environments) — read and write through safe wrappers instead of
-// letting an unguarded call throw and crash the provider.
 function safeStorageGet(key) {
   try {
     if (typeof localStorage === 'undefined') return null;

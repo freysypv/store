@@ -23,8 +23,6 @@ h2 {
   color: #077bee;
 }
 
-
-
 /* User Avatar */
 .user-avatar {
   width: 48px;
@@ -73,7 +71,7 @@ h2 {
 }
 
 .post-button[type="submit"]:hover {
-  background-color: #8acaf5;
+  background-color: #bae2fd;
 }
 
 @media screen and (max-width: 600px) {

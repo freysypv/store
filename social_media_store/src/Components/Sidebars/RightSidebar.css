@@ -95,7 +95,7 @@
   transform: scale(1.03);
 }
 
-/* ---------- Card / trend / follow styles ---------- */
+/* -- Card / trend / follow styles -- */
 
 .sticky-sidebar {
   display: flex;
@@ -134,8 +134,6 @@
   border-bottom: none;
 }
 
-/* Post author avatar (small circle) â€” kept separate from .avatar
-   used by the recommendations list further down, to avoid collisions */
 .trend-avatar {
   width: 40px;
   height: 40px;
@@ -152,7 +150,6 @@
   border-radius: 50%;
 }
 
-/* Post image preview (full-width post photo, separate class from trend-avatar) */
 .image-preview {
   width: 100%;
   max-height: 300px;

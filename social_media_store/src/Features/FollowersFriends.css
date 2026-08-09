@@ -1,4 +1,4 @@
-/* === 1. Base Reset & Page Layout === */
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -46,9 +46,6 @@ body {
   margin-bottom: 0.75rem;
 }
 
-/* ====
-   3. Summary Statistics Bar (<SummaryBar /> & <SummaryStat />)
-   ==== */
 .summary-bar {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -132,9 +129,6 @@ body {
   font-size: 0.9rem;
 }
 
-/* ====
-   5. Interactive Button Modifier States (<FollowButton />)
-   ==== */
 .follow-button-wrapper {
   flex-shrink: 0;
 }
@@ -152,7 +146,6 @@ body {
   text-align: center;
 }
 
-/* State A: Default Unfollowed State */
 .follow-button {
   background-color: #0f1419;
   color: #ffffff;
@@ -162,7 +155,6 @@ body {
   background-color: #272c30;
 }
 
-/* State B: Following State */
 .follow-button.is-following {
   background-color: transparent;
   color: #0f1419;
@@ -175,7 +167,6 @@ body {
   border-color: #fdc9ce;
 }
 
-/* Dynamic Hover Swap: Swaps out "Following" text for "Unfollow" on cursor over */
 .follow-button.is-following:hover::before {
   content: "Unfollow";
   display: block;
@@ -187,7 +178,6 @@ body {
   font-size: 0.9rem;
 }
 
-/* State C: Mutual Friends State */
 .follow-button.is-friend {
   background-color: transparent;
   color: #00ba7c;

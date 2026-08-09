@@ -13,7 +13,7 @@
   box-sizing: border-box;
 }
 
-/* ---------- Horizontal Scroll Area ---------- */
+/* - Horizontal Scroll Area ---*/
 
 .carousel-container {
   display: flex;
@@ -48,7 +48,7 @@
 
 .ring-outer {
   padding: 2.5px;
-  border-radius: 50%;
+  border-radius: 8px 6px 8px 6px;
   transition: transform 0.1s ease;
 }
 
@@ -67,14 +67,14 @@
 .ring-inner {
   background-color: #ffffff;
   padding: 2px;
-  border-radius: 50%;
+  border-radius: 6px 4px 6px 4px;
   display: flex;
 }
 
 .story-avatar {
   width: 56px;
   height: 56px;
-  border-radius: 50%;
+  border-radius: 8px 6px 8px 6px;
   object-fit: cover;
 }
 
@@ -90,7 +90,7 @@
   font-weight: 500;
 }
 
-/* ---------- Navigation Buttons ---------- */
+/* -- Navigation Buttons -- */
 
 .nav-btn {
   position: absolute;
@@ -104,7 +104,7 @@
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   display: none;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .nav-btn:hover {

@@ -77,8 +77,6 @@ export const useAuth = () => {
 };
 
 
-// 2. MAIN AUTH FORM COMPONENT
-
 const AuthForm = () => {
   const navigate = useNavigate();
   const { setUser } = useAuth();

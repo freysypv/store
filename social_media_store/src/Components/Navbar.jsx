@@ -6,14 +6,18 @@ function Navbar() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogoutClick = () => {
-    logout();
+  const handleLogoutClick = async () => {
+    await logout();
     navigate("/signin");
   };
 
   return (
     <nav className="navbar">
-      <h1 className="navbar-logo-text"> The Social Hive </h1>
+      <Link
+        to="/"
+        className="navbar-logo"
+        aria-label="The Social Hive - Home"
+      />
       <div className="navbar-links">
         <Link to="/">Home</Link>
         <Link to="/about">About</Link>
@@ -21,8 +25,12 @@ function Navbar() {
 
         {!user ? (
           <>
-            <Link to="/signin" className="btn-login">Login</Link>
-            <Link to="/signup" className="btn-signup">Signup</Link>
+            <Link to="/signin" className="btn-login">
+              Login
+            </Link>
+            <Link to="/signup" className="btn-signup">
+              Signup
+            </Link>
           </>
         ) : (
           <>

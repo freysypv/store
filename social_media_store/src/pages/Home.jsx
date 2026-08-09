@@ -44,7 +44,7 @@ function Home() {
       {showStoryForm && (
         <div className="modal-overlay" onClick={() => setShowStoryForm(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close-btn" onClick={() => setShowStoryForm(false)}>✕</button>
+            <button className="modal-close-btn" onClick={() => setShowStoryForm(false)}>X</button>
             <Storycreationform onStorySubmit={handleAddNewStory} />
           </div>
         </div>

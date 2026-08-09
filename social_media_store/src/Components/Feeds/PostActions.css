@@ -1,10 +1,9 @@
-/* Container styling */
+
 .post-actions {
   display: flex;
   align-items: center;
   padding: 4px;
 }
-
 
 .like-button {
   display: flex;
@@ -17,24 +16,21 @@
   transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
 }
 
-
 .like-button:hover { 
   color: #e0245e; 
 }
 
 /* Likes */
 .like-button.liked {
-  color: #e0245e; /* Twitter/Instagram style red-pink */
+  color: #e0245e;
   animation: pop 0.3s ease-in-out;
 }
 
-/* Count text styling */
 .like-count {
   font-size: 10px;
 
 }
 
-/* Pop animation when clicked */
 @keyframes pop {
   0% {
     transform: scale(1);
