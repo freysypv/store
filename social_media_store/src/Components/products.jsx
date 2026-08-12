@@ -1,4 +1,4 @@
-//app is the parent of the product, catalog is the parent of product.
+
 import "./product.css";
 import QuantityPicker from "../QuantityPicker"
 
@@ -15,8 +15,6 @@ function Product(props) {
           </label> 
         }
        
-
-        {/* comment */}
       </div>
     </div>
   );

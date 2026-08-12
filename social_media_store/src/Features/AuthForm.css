@@ -7,7 +7,7 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
   padding: 20px; 
   box-sizing: border-box; 
-  background-color: #f9fafb; 
+  background-color: #fdfdfb; 
 } 
 
 /* Form Card */
@@ -15,7 +15,7 @@
   background: #ffffff; 
   padding: 40px; 
   border-radius: 12px; 
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 8px 24px rgba(69, 57, 2, 0.645); 
   width: 100%; 
   max-width: 400px; 
   box-sizing: border-box; 
@@ -24,9 +24,10 @@
 .auth-card h2 { 
   margin-top: 0; 
   margin-bottom: 24px; 
-  color: #0e0d0d; 
+  color: #131313; 
   font-size: 28px; 
   text-align: center; 
+  align-items: center;
   font-weight: 700; 
 } 
 
@@ -69,7 +70,7 @@
   border: none; 
   border-radius: 6px; 
   font-size: 16px; 
-  font-weight: 600; 
+  font-weight: 700; 
   cursor: pointer; 
   transition: background-color 0.2s ease, transform 0.1s ease; 
   margin-top: 10px; 
@@ -87,7 +88,7 @@
 .auth-toggle-text { 
   text-align: center; 
   margin-top: 24px; 
-  color: #374151; 
+  color: #e45909; 
   font-size: 14px; 
 } 
 
@@ -100,6 +101,28 @@
   padding: 2px 4px; 
   border-radius: 4px; 
 } 
+
+.auth-error {
+  background-color: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  margin: -8px 0 16px;
+  text-align: center;
+}
+
+.auth-success {
+  background-color: #ecfdf5;
+  color: #059669;
+  border: 1px solid #a7f3d0;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  margin: -8px 0 16px;
+  text-align: center;
+}
 
 .auth-toggle-link:hover { 
   text-decoration: underline; 
@@ -143,14 +166,13 @@
   } 
 } 
 
-/* --- Fixed Dark Mode Preference (Corrected Class Selectors) --- */
 @media (prefers-color-scheme: dark) { 
   .auth-container { 
-    background: linear-gradient(135deg, #1a1c20 0%, #0f1013 100%); 
+    background: linear-gradient(135deg, #1a1c20 0%, #1c1a16 100%); 
   } 
   
   .auth-card { 
-    background: #24272c; 
+    background: #ededea; 
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4); 
   } 
   
@@ -158,12 +180,10 @@
     .auth-card { background: #1a1c20; }
   }
 
-  .auth-card h2 { 
-    color: #ffffff; 
-  } 
+
   
   .auth-input label { 
-    color: #b0b3b8; 
+    color: #0c0c0c; 
   } 
   
   .auth-input input { 

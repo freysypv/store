@@ -33,27 +33,39 @@ function Home() {
     <div className="home-container">
       <h1 className="title">Welcome Home!</h1>
 
-      <button className="app-btn" onClick={() => setShowStoryForm(true)}>
-        + Add Story
-      </button>
+      <div className="app-btn-container">
+        <button className="app-btn" onClick={() => setShowStoryForm(true)}>
+          New Story
+        </button>
 
-      <button className="app-btn" onClick={() => setShowPostForm(true)}>
-        + Create Post
-      </button>
+        <button className="app-btn" onClick={() => setShowPostForm(true)}>
+          New Post
+        </button>
+      </div>
 
       {showStoryForm && (
-        <div className="modal-overlay" onClick={() => setShowStoryForm(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close-btn" onClick={() => setShowStoryForm(false)}>X</button>
+        <div className="story-form-container" onClick={() => setShowStoryForm(false)}>
+          <div className="story-content" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="close-btn"
+              onClick={() => setShowStoryForm(false)}
+            >
+              X
+            </button>
             <Storycreationform onStorySubmit={handleAddNewStory} />
           </div>
         </div>
       )}
 
       {showPostForm && (
-        <div className="modal-overlay" onClick={() => setShowPostForm(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close-btn" onClick={() => setShowPostForm(false)}>✕</button>
+        <div className="post-form-container" onClick={() => setShowPostForm(false)}>
+          <div className="post-content" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="post-close-btn"
+              onClick={() => setShowPostForm(false)}
+            >
+              ✕
+            </button>
             <CreatePost
               onPostCreated={() => {
                 setShowPostForm(false);

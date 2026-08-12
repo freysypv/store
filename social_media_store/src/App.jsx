@@ -29,8 +29,6 @@ import ProfileCreationForm from './Features/ProfileCreationForm';
 import Storycreationform from './Components/Sidebars/Storycreationform';
 import ProtectedRoute from './Components/ProctectedRoute';
 
-// useLocation only works inside a component rendered under <Router>,
-// so the route-aware bits live in this inner component instead of App() itself.
 function AppContent() {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
@@ -84,9 +82,7 @@ function AppContent() {
           </main>
         </div>
 
-        {/* RightSidebar is position: absolute — rendered outside .app-layout
-            on purpose, since it doesn't participate in the grid.
-            Only shown on the home page. */}
+        
         {showRightSidebar && <RightSidebar />}
       </section>
       <Footer />

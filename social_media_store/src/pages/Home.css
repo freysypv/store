@@ -1,4 +1,4 @@
-/* Container Layout */
+
 .home-container {
   display: grid;
   grid-template-columns: 1fr;
@@ -11,41 +11,52 @@
 }
 
 .title {
-  font-size: 2.5rem;
-  color: #d0f4fc;
+  font-size: 3.2rem;
+  color: #bbe0e7;
   margin-bottom: 1.5rem;
+  margin-right: 28%;
   font-weight: 700;
   justify-self: center;
   text-align: center; 
   border-bottom: 2px solid #9debfd;
 }
 
-/* Dashboard Action Buttons */
+.app-btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: 50%;
+}
+
 .app-btn {
-  background-color: #0076ff;
+  background-color: #f0c346;
   color: #ffffff;
   border: none;
-  padding: 0.75rem 1.5rem;
+  padding: 0;
   font-size: 1.25rem;
   font-weight: 700;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
-  margin: 0 auto;
-  width: 200px;
+  margin: auto 0;
+  width: 125px;
+  height: 55px;
+  
   text-align: center;
   transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 .app-btn:hover {
-  background-color: #005ecb;
+  background-color: #907c0a;
 }
 
 .app-btn:active {
   transform: scale(0.98);
 }
 
-/* Modal Overlay (Background Dimming) */
-.modal-overlay {
+.story-form-container {
   position: fixed;
   top: 0;
   left: 0;
@@ -59,9 +70,9 @@
   backdrop-filter: blur(4px); /* Modern blur effect */
 }
 
-/* Modal Content Box */
-.modal-content {
-  background-color: #ffffff;
+/* story Content Box */
+.story-content {
+  background-color: #eeede9;
   padding: 2.5rem;
   border-radius: 12px;
   position: relative;
@@ -71,15 +82,51 @@
   animation: modalSlideUp 0.3s ease-out;
 }
 
-/* Quick Corner Close Button */
-.modal-close-btn {
+/* form Close Button */
+.close-btn {
   position: absolute;
   top: 1rem;
   right: 1rem;
   background: none;
   border: none;
   font-size: 1.25rem;
-  color: #666666;
+  color: #ed0404;
+  cursor: pointer;
+  padding: 0.25rem;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+.post-form-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px); 
+}
+.post-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 90%;
+  height: 30%;
+  max-width: 700px;     
+  margin: 0 25px; 
+  align-items: stretch; 
+}
+.post-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: #ed0404;
   cursor: pointer;
   padding: 0.25rem;
   line-height: 1;
@@ -91,16 +138,16 @@
   flex-direction: column;
   gap: 20px;
   width: 100%;
-  max-width: 800px;     
+  max-width: 700px;     
   margin: 0 25px; 
   align-items: stretch; 
 }
 
-.modal-close-btn:hover {
+.close-btn:hover {
   color: #1a1a1a;
 }
 
-/* Entrance Animation */
+/* animation */
 @keyframes modalSlideUp {
   from {
     transform: translateY(20px);

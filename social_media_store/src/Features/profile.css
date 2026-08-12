@@ -1,7 +1,7 @@
-/* Container */
+
 .profile-container {
   max-width: 720px;
-  margin: 0 auto 2rem auto;
+  margin: 0 16px;
   background-color: #fff;
   border-radius: 12px;
   overflow: hidden;
@@ -129,7 +129,6 @@
   margin: 0.5rem 0 0 0;
 }
 
-/* Tabs */
 .profile-tabs {
   display: flex;
   gap: 0.5rem;
@@ -163,7 +162,6 @@
   padding: 1.5rem 2rem 2rem 2rem;
 }
 
-/* View mode */
 .profile-view-mode {
   display: flex;
   flex-direction: column;
@@ -197,17 +195,17 @@
   margin-top: 0.5rem;
   padding: 0.6rem 1.25rem;
   font-size: 0.9rem;
-  font-weight: 600;
-  color: #4f46e5;
-  background-color: #fff;
-  border: 1.5px solid #4f46e5;
+  font-weight: 700;
+  color: #f3f3f4;
+  background-color: #1582c5;
+  border: 1.5px solid #64aceb;
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 .btn-edit:hover {
-  background-color: #4f46e5;
+  background-color: #2317f7;
   color: #fff;
 }
 
@@ -221,7 +219,7 @@
   font-size: 0.9rem;
   font-weight: 600;
   color: #fff;
-  background-color: #4f46e5;
+  background-color: #1582c5;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -229,7 +227,7 @@
 }
 
 .btn-submit:hover {
-  background-color: #4338ca;
+  background-color: #3322f4;
 }
 
 .btn-cancel {
@@ -244,6 +242,34 @@
   transition: background-color 0.15s ease;
 }
 
+.btn-change-password {
+  width: 30%;
+  height: 20%;
+  padding: 14px;
+  background-color: #1582c5;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  margin-top: 10px;
+}
+
+.btn-change-password:hover {
+  background-color: #222dff;
+}
+
+.btn-change-password:active {
+  transform: scale(0.98);
+}
+
+.btn-change-password:disabled {
+  background-color: #a5c4e8;
+  cursor: not-allowed;
+  transform: none;
+}
 .btn-cancel:hover {
   background-color: #e2e2e2;
 }

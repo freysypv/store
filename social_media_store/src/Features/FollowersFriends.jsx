@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState, useCallback, useMemo, memo } from 'react';
-
+import "./FollowersFriends.jsx"
 const STORAGE_KEY = 'social_follow_data';
 
 const MOCK_USERS = [
@@ -171,8 +171,10 @@ export function FollowInner() {
 
 export default function FollowersFriends() {
   return (
+   
     <FollowProvider>
       <FollowInner />
     </FollowProvider>
+
   );
 }

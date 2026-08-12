@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from '../Features/AuthForm';
-
+import "./AuthForm.css";
+  
 export default function ChangePassword() {
   const { changePassword } = useAuth();
   const [currentPassword, setCurrentPassword] = useState('');

@@ -2,7 +2,6 @@ import React, { useState, createContext, useContext } from 'react';
 import './AuthForm.css';
 import { useNavigate, Link } from 'react-router-dom';
 
-
 // 1. AUTH CONTEXT & PROVIDER
 
 const AuthContext = createContext(null);

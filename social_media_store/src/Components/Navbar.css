@@ -13,12 +13,12 @@
 .navbar-logo {
   display: block;
   width: 300px;
-  height: 100px;
+  height: 125px;
   background-image: url('../assets/social-hive-logo.png');
   background-repeat: no-repeat;
   background-position: left center;
   background-size: contain;
-  animation: float 3s ease-in-out infinite;
+  animation: float 4s ease-in-out infinite;
 }
 
 @keyframes float {
@@ -26,7 +26,7 @@
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(10px);
   }
   100% {
     transform: translateY(0px);
@@ -54,12 +54,42 @@
 .navbar-links a:hover {
   color: #4a99f3;
 }
+.navbar-user-greeting {
+  color:rgba(238, 196, 7, 0.716);
+}
 
 .btn-signup {
   background-color: #12adf0;
-  color: #ffffff;
+  color: #f8f5f5;
   padding: 8px 18px;
   border-radius: 6px;
+  
+}
+.btn-signup :hover {
+  color: rgb(85, 178, 249)
+}
+
+.btn-login {
+  background-color: #12adf0;
+  color: #f8f5f5;
+  padding: 8px 18px;
+  border-radius: 6px;
+}
+.btn-login:hover {
+  color: rgb(85, 178, 249);
+}
+
+.btn-logout-nav {
+  background-color: #0889c0;
+  color: #f8f5f5;
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(244, 236, 4, 0.738);
+}
+.btn-logout-nav:hover {
+  color: rgb(85, 178, 249);
+  box-shadow: 0 4px 8px rgba(244, 236, 4, 0.738);
 }
 
 /* 5. Mobile Responsiveness */
