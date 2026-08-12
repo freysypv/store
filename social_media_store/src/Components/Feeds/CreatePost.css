@@ -23,18 +23,17 @@ h2 {
   color: #077bee;
 }
 
-/* User Avatar */
 .user-avatar {
   width: 48px;
   height: 48px;
   border-radius: 50%;
   object-fit: cover;
-  flex-shrink: 0; /* Prevents the avatar from squishing */
+  flex-shrink: 0; 
 }
 
-/* Textarea Input styling */
+
 .textarea {
-  width: 97%;
+  width: 100%;
   min-height: 100px;
   padding: 10px;
   border: 1px solid #c8f4da;
@@ -55,8 +54,8 @@ h2 {
 
 }
 
-/* Submit Button State Styles */
-.post-button[type="submit"] {
+/* Submit Button State */
+.post-button{
   align-self: flex-end; 
   background-color: #3498db;
   color: #ffffff;
